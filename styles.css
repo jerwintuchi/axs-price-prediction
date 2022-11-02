@@ -1,0 +1,101 @@
+img {
+    border-radius: 20px;
+    border: px solid #0286ea;
+    object-fit: cover;
+    width: 500px;
+    height: 250px;
+}
+
+
+hr{
+    border: 1px solid white;
+}
+
+a{
+    text-decoration: none;
+    font-size: 25px;
+}
+footer{
+    visibility: hidden;
+}
+
+h1#all-time-chart, h1#last-7-days-chart{
+    text-align: center;
+}
+
+p#weekly_summary{
+    text-align: center;
+    font-size: 25px;
+}
+
+/*Disclaimer*/
+div.css-1fv8s86.e16nr0p33 p{
+    word-spacing: 1.5px;
+}
+
+
+/* m3trics */
+div.element-container.css-1jusep9.e1tzin5v3{
+    border-radius: 20px;
+    border: 3px solid #0286ea;
+}
+
+/* Overview */
+div.css-1fv8s86.e16nr0p33 p{
+    font-size: 23px;
+}
+
+/* Forecast button */
+button.css-1uqmt5j.edgvbvh9{
+
+    margin: 0;
+    width: 35%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    font-size: 24px;
+    padding: 5px;
+    border-radius: 15px;
+    opacity: 1;
+
+}
+
+button.css-1uqmt5j.edgvbvh9:hover{
+    opacity: 0.8;
+
+}
+
+
+/* all time chart */
+div.css-d6lk00.e1tzin5v0{
+
+}
+
+p#footlong{
+    display: block;
+    color: rgba(250, 250, 250, 0.4);
+    flex: 0 1 0%;
+    font-size: 16px;
+    min-width: auto;
+    max-width: initial;
+    padding: 0.5rem 1rem;
+    width: 100%;
+    margin-top: 15px;
+    text-align: center;
+}
+
+span#footshort{
+    font-size: 27px;
+    color: #7ed80c;
+    font-family: "Source Sans Pro", sans-serif;
+    text-decoration: none;
+    transition: color 300ms ease 0s;
+    text-align: center;
+}
+
+/*summary*/
+div.css-1fv8s86.e16nr0p33{
+}
+
