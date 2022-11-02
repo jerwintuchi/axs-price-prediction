@@ -1,5 +1,5 @@
 newspaper3k==0.2.8
-numpy==1.23.4
+numpy==1.21.6
 pandas==1.5.1
 plotly==5.9.0
 pygooglenews==0.1.2
