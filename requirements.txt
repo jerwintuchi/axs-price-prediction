@@ -3,6 +3,7 @@ numpy==1.23.4
 pandas==1.5.1
 plotly==5.9.0
 pygooglenews==0.1.2
+feedparser==6.0.0
 requests==2.28.1
 streamlit==1.14.0
 yfinance==0.1.84
