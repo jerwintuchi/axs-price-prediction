@@ -2,8 +2,6 @@ newspaper3k
 numpy==1.23.4
 pandas==1.5.1
 plotly==5.9.0
-pygooglenews
-feedparser
 requests==2.28.1
 streamlit
 yfinance==0.1.84
