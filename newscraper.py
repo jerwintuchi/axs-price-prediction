@@ -1,5 +1,5 @@
 import googlenews
-from newspaper3k import Article, ArticleException
+from newspaper import Article, ArticleException
 from datetime import datetime
 from time import mktime
 import streamlit as st
