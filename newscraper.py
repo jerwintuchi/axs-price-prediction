@@ -1,4 +1,4 @@
-from pygooglenews import GoogleNews
+import googlenews
 from newspaper import Article, ArticleException
 from datetime import datetime
 from time import mktime
