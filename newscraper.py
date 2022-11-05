@@ -1,4 +1,4 @@
-import googlenews
+from googlenews import GoogleNews
 from newspaper import Article, ArticleException
 from datetime import datetime
 from time import mktime

@@ -33,6 +33,9 @@ div.css-1fv8s86.e16nr0p33 p{
     word-spacing: 1.5px;
 }
 
+p#overview{
+    font-size: 25px;
+}
 
 /* m3trics */
 div.element-container.css-1jusep9.e1tzin5v3{
@@ -40,14 +43,14 @@ div.element-container.css-1jusep9.e1tzin5v3{
     border: 3px solid #0286ea;
 }
 
+
 /* Overview */
-div.css-1fv8s86.e16nr0p33 p{
+div.css-1fv8s86.e16nr0p34{
     font-size: 23px;
 }
 
 /* Forecast button */
-button.css-1uqmt5j.edgvbvh9{
-
+button.css-5uatcg.edgvbvh10, button.css-5uatcg.edgvbvh11, button.css-5uatcg.edgvbvh12{
     margin: 0;
     width: 35%;
     position: absolute;
@@ -59,19 +62,8 @@ button.css-1uqmt5j.edgvbvh9{
     padding: 5px;
     border-radius: 15px;
     opacity: 1;
-
 }
 
-button.css-1uqmt5j.edgvbvh9:hover{
-    opacity: 0.8;
-
-}
-
-
-/* all time chart */
-div.css-d6lk00.e1tzin5v0{
-
-}
 
 p#footlong{
     display: block;

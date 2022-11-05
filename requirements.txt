@@ -1,8 +1,9 @@
-newspaper3k
-numpy==1.23.4
-pandas==1.5.1
-plotly==5.9.0
-requests==2.28.1
-dateparser
 streamlit
-yfinance==0.1.84
+feedparser==6.0.10
+Beautifulsoup4 
+Dateparser == 0.7.6
+Feedparser == 6.0.10
+requests
+newspaper3k
+yfinance
+plotly
