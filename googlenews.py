@@ -1,7 +1,8 @@
 import feedparser
 from bs4 import BeautifulSoup
 import urllib
-from dateparser import parse as parse_date
+#from dateparser import parse as parse_date
+import dateparser
 import requests
 
 
