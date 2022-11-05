@@ -158,7 +158,7 @@ st.write("##")
 #forecasted.drop("Unnamed:0", axis=1)
 #forecasted.drop("Unnamed:0", axis=1, inplace=True)
 
-forecast = pd.read_csv("forecast.csv")
+forecast = pd.read_csv("data_f.csv")
 
 def display_forecast(forecast, range):
 
