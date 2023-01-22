@@ -256,14 +256,15 @@ support = display_data['Low'].rolling(window=20).min()
 resistance = display_data['High'].rolling(window=20).max()
 
 # Create a Plotly figure
-fig = go.Figure()
-fig.add_trace(go.Candlestick(x=display_data.Date, open=display_data.Open, high=display_data.High, low=display_data.Low, close=display_data.Close))
+fig3 = go.Figure()
+fig3.add_trace(go.Candlestick(x=display_data.Date, open=display_data.Open, high=display_data.High, low=display_data.Low, close=display_data.Close))
 
 # Add support and resistance levels to the figure
-fig.add_trace(go.Scatter(x=display_data.Date, y=support, name="Support", line=dict(color='green')))
-fig.add_trace(go.Scatter(x=display_data.Date, y=resistance, name="Resistance", line=dict(color='red')))
+fig3.add_trace(go.Scatter(x=display_data.Date, y=support, name="Support", line=dict(color='green')))
+fig3.add_trace(go.Scatter(x=display_data.Date, y=resistance, name="Resistance", line=dict(color='red')))
 
-fig.show()
+#fig3.show()
+st.plotly_chart(fig3, True)
 
 # fig2.add_trace(go.Scatter(x=display_data_w.Date, y=display_data_w.Close, name="Price"))
 # fig2.layout.update(title="AXS-USD (1d Intervals)")
