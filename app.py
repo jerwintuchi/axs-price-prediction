@@ -262,6 +262,9 @@ fig3.add_trace(go.Candlestick(x=display_data.Date, open=display_data.Open, high=
 # Add support and resistance levels to the figure
 fig3.add_trace(go.Scatter(x=display_data.Date, y=support, name="Support", line=dict(color='green')))
 fig3.add_trace(go.Scatter(x=display_data.Date, y=resistance, name="Resistance", line=dict(color='red')))
+fig3.update_xaxes(griddash='dash', gridwidth=1, gridcolor='#535566')
+fig3.update_yaxes(griddash='dash', gridwidth=1, gridcolor='#535566')
+fig3.update_layout(height=800)
 
 #fig3.show()
 st.plotly_chart(fig3, True)
