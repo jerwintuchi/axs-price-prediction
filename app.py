@@ -305,7 +305,7 @@ fig3.add_trace(go.Candlestick(x=display_data['Date'], open=display_data['Open'],
 
 # A function to check if a support level is far from the other levels
 def isFar(value, levels, display_data):
-    ave =  np.mean(ddisplay_dataf['High'] - display_data['Low'])
+    ave =  np.mean(display_data['High'] - display_data['Low'])
     return np.sum([abs(value-level)<ave for _,level in levels])==0
 
 # A list to store resistance and support levels
