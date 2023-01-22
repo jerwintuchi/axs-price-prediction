@@ -278,11 +278,11 @@ for i in range(2, len(display_data)-2):
 
 levels = []
 for i in range(2,display_data.shape[0]-2):
-  if supportlvl(df,i):
+  if supportlvl(display_data,i):
     levels.append((i,display_data['Low'][i]))
   elif resistancelvl(display_data,i):
     levels.append((i,display_data['High'][i]))
-    
+
 # Create a Plotly figure
 fig3 = go.Figure()
 # Add a candlestick chart of the data
