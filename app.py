@@ -241,7 +241,7 @@ def plot_sr(levels,display_data):
                xmax=max(display_data['Date']),colors='blue')
   fig.show()
 
-  plot_sr()
+  plot_sr(levels,display_data)
 
 
 
