@@ -252,24 +252,6 @@ def plot_sr(levels,display_data):
 
 """
 
-def supportlvl(display_data,i):
-    #if the previous 2 candles(1st and 2nd candle) is less than the 3rd candle (df['Low'][i]) and the succeeding 2 candles is greater than 3rd candle (df['Low'][i])
-    #then it is the supportlvl
-  support = display_data['Low'][i] < display_data['Low'][i-1] and display_data['Low'][i] < display_data['Low'][i+1] and display_data['Low'][i+1] < display_data['Low'][i+2] and display_data['Low'][i-1] < display_data['Low'][i-2]
-  return support
-
-def resistancelvl(display_data,i):
-    #same logic with supportlvl except that it is reversed
-  resistance = display_data['High'][i] > display_data['High'][i-1]  and display_data['High'][i] > display_data['High'][i+1] and display_data['High'][i+1] > display_data['High'][i+2] and display_data['High'][i-1] > display_data['High'][i-2]
-  return resistance
-
-levels = []
-for i in range(2,display_data.shape[0]-2):
-  if supportlvl(display_data,i):
-    levels.append((i,display_data['Low'][i]))
-  elif resistancelvl(display_data,i):
-    levels.append((i,display_data['High'][i]))
-
 # Calculate support and resistance levels
 #support = supportlvl(display_data.Low)
 #resistance = resistancelvl(display_data.High)
@@ -281,14 +263,28 @@ fig3.add_trace(go.Candlestick(x=display_data.Date, open=display_data.Open, high=
 # Add support and resistance levels to the figure
 fig3.add_trace(go.Scatter(x=display_data.Date))
 fig3.add_trace(go.Scatter(x=display_data.Date))
+#support level
+fig3.add_shape(
+    type='line',
+    x0=df['Date'].iloc[0],
+    y0=df['Low'].rolling(window=20).min(),
+    x1=df['Date'].iloc[-1],
+    y1=df['Low'].rolling(window=20).min(),
+    line=dict(color='green', width=2, dash='dash')
+)
+
+# resistance level
+fig3.add_shape(
+    type='line',
+    x0=df['Date'].iloc[0],
+    y0=df['High'].rolling(window=20).max(),
+    x1=df['Date'].iloc[-1],
+    y1=df['High'].rolling(window=20).max(),
+    line=dict(color='red', width=2, dash='dash')
+)
 fig3.update_xaxes(griddash='dash', gridwidth=1, gridcolor='#535566')
 fig3.update_yaxes(griddash='dash', gridwidth=1, gridcolor='#535566')
-
-for level in levels:
-    fig3.add_hline(y=level[1],colors='blue')
-
 fig3.update_layout(height=800)
-fig.show()
 
 #fig3.show()
 st.plotly_chart(fig3, True)
