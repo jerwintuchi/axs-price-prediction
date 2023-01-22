@@ -285,8 +285,7 @@ fig3.update_xaxes(griddash='dash', gridwidth=1, gridcolor='#535566')
 fig3.update_yaxes(griddash='dash', gridwidth=1, gridcolor='#535566')
 
 for level in levels:
-    fig3.add_hline(y=level[1],xmin=display_data['Date'][level[0]],
-    xmax=max(display_data.Date),colors='blue')
+    fig3.add_hline(y=level[1],colors='blue')
 
 fig3.update_layout(height=800)
 
