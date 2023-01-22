@@ -270,7 +270,7 @@ fig3.add_trace(go.Candlestick(x=display_data['Date'], open=display_data['Open'],
 
 # Add support levels to the figure
 for i in support:
-    fig.add_shape(
+    fig3.add_shape(
         type='line',
         x0=display_data['Date'].iloc[0],
         y0=i,
@@ -281,7 +281,7 @@ for i in support:
 
 # Add resistance levels to the figure
 for i in resistance:
-    fig.add_shape(
+    fig3.add_shape(
         type='line',
         x0=display_data['Date'].iloc[0],
         y0=i,
