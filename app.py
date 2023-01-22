@@ -343,7 +343,7 @@ for i in range(len(support)):
 for i in range(len(resistance)):
     if i == 0 or resistance[i] - resistance[i-1] > threshold:
         for i, high in levels:
-            if high == df['High'][i]:
+            if high == display_data['High'][i]:
                 fig3.add_shape(
                     type='line',
                     x0=display_data['Date'].iloc[0],
