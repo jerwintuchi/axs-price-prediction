@@ -323,11 +323,10 @@ for i in range(2, display_data.shape[0] - 2):
             levels.append((i, high))
 
 # Create a threshold variable to set the minimum distance between lines
-threshold = 2
+threshold = 0.05
 
 # Add support levels to the figure
 for i in range(len(support)):
-    if i == 0 or support[i] - support[i-1] > threshold:
         for i, low in levels:
             if low == display_data['Low'][i]:
                 fig3.add_shape(
@@ -341,7 +340,6 @@ for i in range(len(support)):
 
 # Add resistance levels to the figure
 for i in range(len(resistance)):
-    if i == 0 or resistance[i] - resistance[i-1] > threshold:
         for i, high in levels:
             if high == display_data['High'][i]:
                 fig3.add_shape(
