@@ -318,7 +318,7 @@ for i in range(len(resistance)):
         y0=resistance[i],
         x1=display_data['Date'].iloc[-1],
         y1=resistance[i],
-        line=dict(color='red', width=2, dash='dash')
+        line=dict(color='red', width=2, dash='dash'))
 
 fig3.update_xaxes(griddash='dash', gridwidth=1, gridcolor='#535566')
 fig3.update_yaxes(griddash='dash', gridwidth=1, gridcolor='#535566')
