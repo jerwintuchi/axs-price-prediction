@@ -205,6 +205,7 @@ fig2.update_yaxes(griddash='dash', gridwidth=0, gridcolor='#535566')
 st.plotly_chart(fig2, True)
 
 """
+"""
 Function for the maderpaking SUPPORT and RESISTANCE levels using fractal candlestick pattern
 """
 def supportlvl(display_data,i):
@@ -236,7 +237,7 @@ def plot_sr(levels,display_data):
   fig.update_xaxes(griddash='dash', gridwidth=1, gridcolor='#535566')
   fig.update_yaxes(griddash='dash', gridwidth=1, gridcolor='#535566')
   fig.update_layout(height=800)      
-             
+
   date_format = mpl_dates.DateFormatter('%d %b %Y')
   ax.xaxis.set_major_formatter(date_format)
   fig.autofmt_xdate()
@@ -248,7 +249,20 @@ def plot_sr(levels,display_data):
 
   plot_sr(levels,display_data)
 
+"""
 
+# Calculate support and resistance levels
+support = display_data['Low'].rolling(window=20).min()
+resistance = display_data['High'].rolling(window=20).max()
+
+# Create a Plotly figure
+fig = go.Figure(data=[go.Candlestick(x=display_data['Date'], open=display_data['Open'], high=display_data['High'], low=display_data['Low'], close=display_data['Close'])])
+
+# Add support and resistance levels to the figure
+fig.add_trace(go.Scatter(x=df['Date'], y=support, name="Support", line=dict(color='green')))
+fig.add_trace(go.Scatter(x=df['Date'], y=resistance, name="Resistance", line=dict(color='red')))
+
+fig.show()
 
 # fig2.add_trace(go.Scatter(x=display_data_w.Date, y=display_data_w.Close, name="Price"))
 # fig2.layout.update(title="AXS-USD (1d Intervals)")
