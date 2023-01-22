@@ -275,25 +275,26 @@ for i in range(2, len(display_data)-2):
         resistance.append(display_data['High'][i])
 
 """
-def isFar(l):
-   return np.sum([abs(l-x) < s  for x in levels]) == 0
+"""
+def isFar(value, levels, df):    
+  ave =  np.mean(display_data['High'] - df['Low'])    
+  return np.sum([abs(value-level)<ave for _,level in levels])==0
 
 s =  np.mean(display_data['High'] - display_data['Low']) #volatility
 
+# a list to store resistance and support levels
 levels = []
-for i in range(2,display_data.shape[0]-2):
-  if supportlvl(display_data,i):
-    levels.append((i,display_data['Low'][i]))
-    if isFar(l):
-      levels.append((i,l))
-  elif resistancelvl(display_data,i):
-    levels.append((i,display_data['High'][i]))
-    if isFar(l):
-      levels.append((i,l))
+for i in range(2, display_data.shape[0] - 2):  
+  if supportlvl(display_data, i):    
+    low = display_data['Low'][i]    
+    if isFar(low, levels, display_data):      
+      levels.append((i, low))  
+  elif resistancelvl(display_data, i):    
+    high = display_data['High'][i]    
+    if isFar(high, levels, display_data):      
+      levels.append((i, high))
 
-
-
-
+"""
 
 
 # Create a Plotly figure
@@ -301,31 +302,55 @@ fig3 = go.Figure()
 # Add a candlestick chart of the data
 fig3.add_trace(go.Candlestick(x=display_data['Date'], open=display_data['Open'], high=display_data['High'], low=display_data['Low'], close=display_data['Close']))
 
+
+# A function to check if a support level is far from the other levels
+def isFar(value, levels, display_data):
+    ave =  np.mean(ddisplay_dataf['High'] - df['Low'])
+    return np.sum([abs(value-level)<ave for _,level in levels])==0
+
+# A list to store resistance and support levels
+levels = []
+
+# Iterate through the dataframe
+for i in range(2, display_data.shape[0] - 2):
+    if supportlvl(display_data, i):
+        low = df['Low'][i]
+        if isFar(low, levels, display_data):
+            levels.append((i, low))
+    elif resistancelvl(display_data, i):
+        high = display_data['High'][i]
+        if isFar(high, levels, display_data):
+            levels.append((i, high))
+
 # Create a threshold variable to set the minimum distance between lines
 threshold = 2
 
 # Add support levels to the figure
 for i in range(len(support)):
     if i == 0 or support[i] - support[i-1] > threshold:
-        fig3.add_shape(
-            type='line',
-            x0=display_data['Date'].iloc[0],
-            y0=support[i],
-            x1=display_data['Date'].iloc[-1],
-            y1=support[i],
-            line=dict(color='green', width=2, dash='dash')
+        for i, low in levels:
+            if low == display_data['Low'][i]:
+                fig3.add_shape(
+                    type='line',
+                    x0=display_data['Date'].iloc[0],
+                    y0=support[i],
+                    x1=display_data['Date'].iloc[-1],
+                    y1=support[i],
+                    line=dict(color='green', width=2, dash='dash')
         )
 
 # Add resistance levels to the figure
 for i in range(len(resistance)):
     if i == 0 or resistance[i] - resistance[i-1] > threshold:
-        fig3.add_shape(
-            type='line',
-            x0=display_data['Date'].iloc[0],
-            y0=resistance[i],
-            x1=display_data['Date'].iloc[-1],
-            y1=resistance[i],
-            line=dict(color='red', width=2, dash='dash')
+        for i, high in levels:
+            if high == df['High'][i]:
+                fig3.add_shape(
+                    type='line',
+                    x0=display_data['Date'].iloc[0],
+                    y0=resistance[i],
+                    x1=display_data['Date'].iloc[-1],
+                    y1=resistance[i],
+                    line=dict(color='red', width=2, dash='dash')
         )
 
 # Removing duplicates values
