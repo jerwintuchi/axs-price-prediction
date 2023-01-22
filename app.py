@@ -260,28 +260,22 @@ def plot_sr(levels,display_data):
 fig3 = go.Figure()
 fig3.add_trace(go.Candlestick(x=display_data.Date, open=display_data.Open, high=display_data.High, low=display_data.Low, close=display_data.Close))
 
-# Add support and resistance levels to the figure
-fig3.add_trace(go.Scatter(x=display_data.Date))
-fig3.add_trace(go.Scatter(x=display_data.Date))
-#support level
-fig3.add_shape(
-    type='line',
-    x0=display_data.Date.iloc[0],
-    y0=display_data.Low.rolling(window=20).min(),
-    x1=display_data.Date.iloc[-1],
-    y1=display_data.Low.rolling(window=20).min(),
-    line=dict(color='green', width=2, dash='dash')
-)
+# Calculate support and resistance levels
+support = display_data['Low'].rolling(window=20).min()
+resistance = display_data['High'].rolling(window=20).max()
 
-# resistance level
-fig3.add_shape(
-    type='line',
-    x0=display_data.Date.iloc[0],
-    y0=display_data.High.rolling(window=20).max(),
-    x1=display_data.Date.iloc[-1],
-    y1=display_data.High.rolling(window=20).max(),
-    line=dict(color='red', width=2, dash='dash')
-)
+# Add support and resistance columns to DataFrame
+display_data['Support'] = support
+display_data['Resistance'] = resistance
+
+# Add a line chart of the close prices
+fig.add_trace(go.Scatter(x=display_data['Date'], y=display_data['Close'], name='Close'))
+
+# Add support level
+fig.add_trace(go.Scatter(x=display_data['Date'], y=display_data['Support'], name='Support', line=dict(color='green')))
+
+# Add resistance level
+fig.add_trace(go.Scatter(x=display_data['Date'], y=display_data['Resistance'], name='Resistance', line=dict(color='red')))
 fig3.update_xaxes(griddash='dash', gridwidth=1, gridcolor='#535566')
 fig3.update_yaxes(griddash='dash', gridwidth=1, gridcolor='#535566')
 fig3.update_layout(height=800)
