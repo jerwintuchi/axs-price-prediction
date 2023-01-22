@@ -288,6 +288,7 @@ for level in levels:
     fig3.add_hline(y=level[1],colors='blue')
 
 fig3.update_layout(height=800)
+fig.show()
 
 #fig3.show()
 st.plotly_chart(fig3, True)
