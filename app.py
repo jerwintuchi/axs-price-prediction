@@ -264,16 +264,16 @@ def resistancelvl(display_data,i):
   return resistance
 
 # Calculate support and resistance levels
-supp = supportlvl()
-resist = resistancelvl()
+support = supportlvl(display_data.Low)
+resistance = resistancelvl(display_data.High)
 
 # Create a Plotly figure
 fig3 = go.Figure()
 fig3.add_trace(go.Candlestick(x=display_data.Date, open=display_data.Open, high=display_data.High, low=display_data.Low, close=display_data.Close))
 
 # Add support and resistance levels to the figure
-fig3.add_trace(go.Scatter(x=display_data.Date, y=supp, name="Support", line=dict(color='green')))
-fig3.add_trace(go.Scatter(x=display_data.Date, y=resist, name="Resistance", line=dict(color='red')))
+fig3.add_trace(go.Scatter(x=display_data.Date, y=support, name="Support", line=dict(color='green')))
+fig3.add_trace(go.Scatter(x=display_data.Date, y=resistance, name="Resistance", line=dict(color='red')))
 fig3.update_xaxes(griddash='dash', gridwidth=1, gridcolor='#535566')
 fig3.update_yaxes(griddash='dash', gridwidth=1, gridcolor='#535566')
 fig3.update_layout(height=800)
