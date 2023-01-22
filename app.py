@@ -331,9 +331,9 @@ for i, low in levels:
         fig3.add_shape(
             type='line',
             x0=display_data['Date'].iloc[i],
-            y0=support[i],
+            y0=low,
             x1=display_data['Date'].iloc[i],
-            y1=support[i],
+            y1=low,
             line=dict(color='green', width=2, dash='dash')
         )
 
