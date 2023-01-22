@@ -266,20 +266,20 @@ fig3.add_trace(go.Scatter(x=display_data.Date))
 #support level
 fig3.add_shape(
     type='line',
-    x0=df['Date'].iloc[0],
-    y0=df['Low'].rolling(window=20).min(),
-    x1=df['Date'].iloc[-1],
-    y1=df['Low'].rolling(window=20).min(),
+    x0=display_data['Date'].iloc[0],
+    y0=display_data['Low'].rolling(window=20).min(),
+    x1=display_data['Date'].iloc[-1],
+    y1=display_data['Low'].rolling(window=20).min(),
     line=dict(color='green', width=2, dash='dash')
 )
 
 # resistance level
 fig3.add_shape(
     type='line',
-    x0=df['Date'].iloc[0],
-    y0=df['High'].rolling(window=20).max(),
-    x1=df['Date'].iloc[-1],
-    y1=df['High'].rolling(window=20).max(),
+    x0=display_data['Date'].iloc[0],
+    y0=display_data['High'].rolling(window=20).max(),
+    x1=display_data['Date'].iloc[-1],
+    y1=display_data['High'].rolling(window=20).max(),
     line=dict(color='red', width=2, dash='dash')
 )
 fig3.update_xaxes(griddash='dash', gridwidth=1, gridcolor='#535566')
