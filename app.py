@@ -240,6 +240,7 @@ def plot_sr():
     fig.addhline(level[1],xmin=display_data['Date'][level[0]],
                xmax=max(display_data['Date']),colors='blue')
   fig.show()
+  plot_sr()
 
 
 
