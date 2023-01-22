@@ -1,6 +1,5 @@
 from datetime import date, timedelta
 from plotly import graph_objs as go
-from mpl_finance import candlestick_ohlc
 import matplotlib.dates as mpl_dates
 import pandas as pd, numpy as np, streamlit as st, yfinance as yf, pandas_ta as ta
 #from cmc_api import live_price, daily_change, weekly_change, marketcap, week_before, past_month, daily_volume, daily_volume_change
