@@ -213,17 +213,17 @@ def supportlvl(display_data,i):
   support = display_data['Low'][i] < display_data['Low'][i-1] and display_data['Low'][i] < display_data['Low'][i+1] and display_data['Low'][i+1] < display_data['Low'][i+2] and display_data['Low'][i-1] < display_data['Low'][i-2]
   return support
 
-def resistancelvl(df,i):
+def resistancelvl(display_data,i):
     #same logic with supportlvl except that it is reversed
-  resistance = display_data['High'][i] > display_data['High'][i-1]  and display_data['High'][i] > display_data['High'][i+1] and display_data['High'][i+1] > display_data['High'][i+2] and display_datadf['High'][i-1] > display_data['High'][i-2]
+  resistance = display_data['High'][i] > display_data['High'][i-1]  and display_data['High'][i] > display_data['High'][i+1] and display_data['High'][i+1] > display_data['High'][i+2] and display_data['High'][i-1] > display_data['High'][i-2]
   return resistance
 
 #list containing each level (S or R) where each level is a tuple that its first element is the index of the signal candle and the second being the price value
 levels = []
 for i in range(2,display_data.shape[0]-2):
-  if supportlvl(df,i):
+  if supportlvl(display_data,i):
     levels.append((i,display_data['Low'][i]))
-  elif resistancelvl(df,i):
+  elif resistancelvl(display_data,i):
     levels.append((i,display_data['High'][i]))
 
 #Plotting the Support and Resistance Levels
@@ -237,8 +237,8 @@ def plot_sr():
   fig.autofmt_xdate()
   fig.tight_layout()
   for level in levels:
-    fig.addhline(level[1],xmin=df['Date'][level[0]],
-               xmax=max(df['Date']),colors='blue')
+    fig.addhline(level[1],xmin=display_data['Date'][level[0]],
+               xmax=max(display_data['Date']),colors='blue')
   fig.show()
 
 
