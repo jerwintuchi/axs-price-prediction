@@ -252,30 +252,27 @@ def plot_sr(levels,display_data):
 
 """
 
-# Calculate support and resistance levels
-#support = supportlvl(display_data.Low)
-#resistance = resistancelvl(display_data.High)
+# Initialize empty lists for support and resistance levels
+support = []
+resistance = []
+
+# Iterate through the dataframe
+for i in range(2, len(display_data)-2):
+    if (display_data['Low'][i] < display_data['Low'][i-1]) and (display_data['Low'][i] < display_data['Low'][i+1]) and (display_data['Low'][i+1] < display_data['Low'][i+2]) and (display_data['Low'][i-1] < display_data['Low'][i-2]):
+        support.append(df['Low'][i])
+    if (display_data['High'][i] > display_data['High'][i-1]) and (display_data['High'][i] > display_data['High'][i+1]) and (display_data['High'][i+1] > display_data['High'][i+2]) and (display_data['High'][i-1] > display_data['High'][i-2]):
+        resistance.append(display_data['High'][i])
 
 # Create a Plotly figure
 fig3 = go.Figure()
-fig3.add_trace(go.Candlestick(x=display_data.Date, open=display_data.Open, high=display_data.High, low=display_data.Low, close=display_data.Close))
+# Add a candlestick chart of the data
+fig3.add_trace(go.Candlestick(x=display_data['Date'], open=display_data['Open'], high=display_data['High'], low=display_data['Low'], close=display_data['Close']))
 
-# Calculate support and resistance levels
-support = display_data['Low'].rolling(window=20).min()
-resistance = display_data['High'].rolling(window=20).max()
+# Add support levels to the figure
+fig3.add_trace(go.Scatter(x=[display_data['Date'][i] for i in range(2, len(display_data)-2) if display_data['Low'][i] in support], y=support, name="Support", mode='markers', marker=dict(color='green')))
 
-# Add support and resistance columns to DataFrame
-display_data['Support'] = support
-display_data['Resistance'] = resistance
-
-# Add a line chart of the close prices
-fig3.add_trace(go.Scatter(x=display_data['Date'], y=display_data['Close'], name='Close'))
-
-# Add support level
-fig3.add_trace(go.Scatter(x=display_data['Date'], y=display_data['Support'], name='Support', line=dict(color='green')))
-
-# Add resistance level
-fig3.add_trace(go.Scatter(x=display_data['Date'], y=display_data['Resistance'], name='Resistance', line=dict(color='red')))
+# Add resistance levels to the figure
+fig3.add_trace(go.Scatter(x=[df['Date'][i] for i in range(2, len(display_data)-2) if display_data['High'][i] in resistance], y=resistance, name="Resistance", mode='markers', marker=dict(color='red')))
 
 fig3.update_xaxes(griddash='dash', gridwidth=1, gridcolor='#535566')
 fig3.update_yaxes(griddash='dash', gridwidth=1, gridcolor='#535566')
