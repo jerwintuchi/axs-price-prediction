@@ -237,7 +237,7 @@ def plot_sr(levels,display_data):
   fig.autofmt_xdate()
   fig.tight_layout()
   for level in levels:
-    fig.addhline(level[1],xmin=display_data['Date'][level[0]],
+    fig.add_hline(level[1],xmin=display_data['Date'][level[0]],
                xmax=max(display_data['Date']),colors='blue')
   fig.show()
 
