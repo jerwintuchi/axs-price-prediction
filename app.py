@@ -330,9 +330,9 @@ for i, low in levels:
     if low == display_data['Low'][i]:
         fig3.add_shape(
             type='line',
-            x0=display_data['Date'].iloc[0],
+            x0=display_data['Date'].iloc[i],
             y0=support[i],
-            x1=display_data['Date'].iloc[-1],
+            x1=display_data['Date'].iloc[i],
             y1=support[i],
             line=dict(color='green', width=2, dash='dash')
         )
@@ -342,10 +342,10 @@ for i, high in levels:
     if high == display_data['High'][i]:
         fig3.add_shape(
             type='line',
-            x0=display_data['Date'].iloc[0],
-            y0=resistance[i],
-            x1=display_data['Date'].iloc[-1],
-            y1=resistance[i],
+            x0=display_data['Date'].iloc[i],
+            y0=high,
+            x1=display_data['Date'].iloc[i],
+            y1=high,
             line=dict(color='red', width=2, dash='dash')
         )
 
