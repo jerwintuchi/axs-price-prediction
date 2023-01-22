@@ -205,9 +205,9 @@ fig2.update_yaxes(griddash='dash', gridwidth=0, gridcolor='#535566')
 st.plotly_chart(fig2, True)
 
 """
-"""
+
 Function for the maderpaking SUPPORT and RESISTANCE levels using fractal candlestick pattern
-"""
+
 def supportlvl(display_data,i):
     #if the previous 2 candles(1st and 2nd candle) is less than the 3rd candle (df['Low'][i]) and the succeeding 2 candles is greater than 3rd candle (df['Low'][i])
     #then it is the supportlvl
