@@ -256,7 +256,8 @@ support = display_data['Low'].rolling(window=20).min()
 resistance = display_data['High'].rolling(window=20).max()
 
 # Create a Plotly figure
-fig = go.Figure(data=[go.Candlestick(x=display_data.Date, open=display_data.Open, high=display_data.High, low=display_data.Low, close=display_data.Close)])
+fig = go.Figure()
+fig.add_trace(data=go.Candlestick(x=display_data.Date, open=display_data.Open, high=display_data.High, low=display_data.Low, close=display_data.Close))
 
 # Add support and resistance levels to the figure
 fig.add_trace(go.Scatter(x=display_data['Date'], y=support, name="Support", line=dict(color='green')))
