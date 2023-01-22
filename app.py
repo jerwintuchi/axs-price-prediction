@@ -218,7 +218,8 @@ def resistancelvl(display_data,i):
     #same logic with supportlvl except that it is reversed
   resistance = display_data['High'][i] > display_data['High'][i-1]  and display_data['High'][i] > display_data['High'][i+1] and display_data['High'][i+1] > display_data['High'][i+2] and display_data['High'][i-1] > display_data['High'][i-2]
   return resistance
-
+"""
+"""
 #list containing each level (S or R) where each level is a tuple that its first element is the index of the signal candle and the second being the price value
 levels = []
 for i in range(2,display_data.shape[0]-2):
@@ -251,9 +252,20 @@ def plot_sr(levels,display_data):
 
 """
 
+def supportlvl(display_data,i):
+    #if the previous 2 candles(1st and 2nd candle) is less than the 3rd candle (df['Low'][i]) and the succeeding 2 candles is greater than 3rd candle (df['Low'][i])
+    #then it is the supportlvl
+  support = display_data['Low'][i] < display_data['Low'][i-1] and display_data['Low'][i] < display_data['Low'][i+1] and display_data['Low'][i+1] < display_data['Low'][i+2] and display_data['Low'][i-1] < display_data['Low'][i-2]
+  return support
+
+def resistancelvl(display_data,i):
+    #same logic with supportlvl except that it is reversed
+  resistance = display_data['High'][i] > display_data['High'][i-1]  and display_data['High'][i] > display_data['High'][i+1] and display_data['High'][i+1] > display_data['High'][i+2] and display_data['High'][i-1] > display_data['High'][i-2]
+  return resistance
+
 # Calculate support and resistance levels
-support = display_data['Low'].rolling(window=20).min()
-resistance = display_data['High'].rolling(window=20).max()
+support = supportlvl(display_data,i)
+resistance = resistancelvl(display_data,i)
 
 # Create a Plotly figure
 fig3 = go.Figure()
