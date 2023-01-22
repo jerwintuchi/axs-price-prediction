@@ -319,21 +319,7 @@ for i in range(len(resistance)):
         x1=display_data['Date'].iloc[-1],
         y1=resistance[i],
         line=dict(color='red', width=2, dash='dash')
-)
 
-
-
-Jerwin Peralta
-continue
-):
-fig.add_shape(
-type='line',
-x0=df['Date'].iloc[0],
-y0=support[i],
-x1=df['Date'].iloc[-1],
-y1=support[i],
-line=dict(color='green', width=2, dash='dash')
-)
 fig3.update_xaxes(griddash='dash', gridwidth=1, gridcolor='#535566')
 fig3.update_yaxes(griddash='dash', gridwidth=1, gridcolor='#535566')
 fig3.update_layout(height=800)
