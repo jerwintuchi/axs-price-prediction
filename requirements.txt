@@ -1,9 +1,10 @@
-streamlit
+streamlit==1.13.0
 feedparser==6.0.10
 Beautifulsoup4 
 Dateparser == 0.7.6
 Feedparser == 6.0.10
 requests
 newspaper3k
-yfinance
+yfinance == 0.1.74
 plotly
+pandas_ta

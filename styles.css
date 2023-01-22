@@ -50,7 +50,7 @@ div.css-1fv8s86.e16nr0p34{
 }
 
 /* Forecast button */
-button.css-5uatcg.edgvbvh10, button.css-5uatcg.edgvbvh11, button.css-5uatcg.edgvbvh12{
+button{
     margin: 0;
     width: 35%;
     position: absolute;

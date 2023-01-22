@@ -10,7 +10,7 @@ gn = GoogleNews()
 
 #"thumbnail": "https://cryptoslate.com/wp-content/uploads/2021/08/axs-750x.jpg"
 # need to try catch failed fetches and replace it with a backup thumbnail
-def scrape_thumbnail(list):
+def scrape_thumbnail(list):  
     for i in list:
         try:
             scraper = Article(url=i["link"])
@@ -19,14 +19,14 @@ def scrape_thumbnail(list):
             i["thumbnail"] = scraper.top_image
         except(ArticleException): 
             list.remove(i)
-
     return list
 
-@st.cache(show_spinner =False)
+
+@st.cache()
 def get_news(news_count):
-    q = gn.search("Axie Infinity", when="7d")
+    q = gn.search("Axie Infinity", when="14d")
     entries = q["entries"]
-    print(entries)
+    #print(entries)
     news = []
     n=0
     for i in entries:
@@ -45,7 +45,8 @@ def get_news(news_count):
         }
         news.append(article)
         n+=1
-        if n > news_count: break
+        if n > news_count: 
+            break
 
     return scrape_thumbnail(news)
 #news = get_news()
