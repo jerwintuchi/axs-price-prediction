@@ -264,8 +264,8 @@ def resistancelvl(display_data,i):
   return resistance
 
 # Calculate support and resistance levels
-support = supportlvl(display_data,i)
-resistance = resistancelvl(display_data,i)
+support = supportlvl(display_data)
+resistance = resistancelvl(display_data)
 
 # Create a Plotly figure
 fig3 = go.Figure()
