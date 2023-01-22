@@ -320,7 +320,7 @@ def isFar(value, levels, display_data):
 levels = find_levels(display_data)
 
 # remove levels that are too close to existing levels
-filtered_levels = [(x, y) for x, y, _ in levels if isFar(y, levels, display_data)]
+filtered_levels = [(x, y, z) for x, y, z in levels if isFar(y, levels, display_data)]
 
 # create the scatter traces for resistance and support levels
 resistance_trace = go.Scatter(x=[x[0] for x in filtered_levels if x[2] == 'resistance'],
