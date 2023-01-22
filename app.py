@@ -232,6 +232,11 @@ def plot_sr(levels,display_data):
   fig, ax = plt.subplots()
   fig.add_trace(go.Scatter(ax,display_data.values,width=0.6, 
                    colorup='green', colordown='red', alpha=0.8))
+  fig.layout.update(title="AXS-USD (1d Intervals)")
+  fig.update_xaxes(griddash='dash', gridwidth=1, gridcolor='#535566')
+  fig.update_yaxes(griddash='dash', gridwidth=1, gridcolor='#535566')
+  fig.update_layout(height=800)      
+             
   date_format = mpl_dates.DateFormatter('%d %b %Y')
   ax.xaxis.set_major_formatter(date_format)
   fig.autofmt_xdate()
