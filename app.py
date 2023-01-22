@@ -272,7 +272,7 @@ fig3.add_trace(go.Candlestick(x=display_data['Date'], open=display_data['Open'],
 fig3.add_trace(go.Scatter(x=[display_data['Date'][i] for i in range(2, len(display_data)-2) if display_data['Low'][i] in support], y=support, name="Support", mode='markers', marker=dict(color='green')))
 
 # Add resistance levels to the figure
-fig3.add_trace(go.Scatter(x=[df['Date'][i] for i in range(2, len(display_data)-2) if display_data['High'][i] in resistance], y=resistance, name="Resistance", mode='markers', marker=dict(color='red')))
+fig3.add_trace(go.Scatter(x=[display_data['Date'][i] for i in range(2, len(display_data)-2) if display_data['High'][i] in resistance], y=resistance, name="Resistance", mode='markers', marker=dict(color='red')))
 
 fig3.update_xaxes(griddash='dash', gridwidth=1, gridcolor='#535566')
 fig3.update_yaxes(griddash='dash', gridwidth=1, gridcolor='#535566')
