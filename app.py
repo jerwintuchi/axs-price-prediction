@@ -269,13 +269,14 @@ display_data['Support'] = support
 display_data['Resistance'] = resistance
 
 # Add a line chart of the close prices
-fig.add_trace(go.Scatter(x=display_data['Date'], y=display_data['Close'], name='Close'))
+fig3.add_trace(go.Scatter(x=display_data['Date'], y=display_data['Close'], name='Close'))
 
 # Add support level
-fig.add_trace(go.Scatter(x=display_data['Date'], y=display_data['Support'], name='Support', line=dict(color='green')))
+fig3.add_trace(go.Scatter(x=display_data['Date'], y=display_data['Support'], name='Support', line=dict(color='green')))
 
 # Add resistance level
-fig.add_trace(go.Scatter(x=display_data['Date'], y=display_data['Resistance'], name='Resistance', line=dict(color='red')))
+fig3.add_trace(go.Scatter(x=display_data['Date'], y=display_data['Resistance'], name='Resistance', line=dict(color='red')))
+
 fig3.update_xaxes(griddash='dash', gridwidth=1, gridcolor='#535566')
 fig3.update_yaxes(griddash='dash', gridwidth=1, gridcolor='#535566')
 fig3.update_layout(height=800)
