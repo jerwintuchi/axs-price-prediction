@@ -299,7 +299,7 @@ for i in range(2, display_data.shape[0] - 2):
 def find_levels(display_data):
     levels = []
     for i in range(1, display_data.shape[0]-1):
-        if (display_data.iloc[i]['Low'] > ddisplay_data.iloc[i-1]['Low'] and display_data.iloc[i]['Low'] > display_data.iloc[i+1]['Low']):
+        if (display_data.iloc[i]['Low'] > display_data.iloc[i-1]['Low'] and display_data.iloc[i]['Low'] > display_data.iloc[i+1]['Low']):
             levels.append((df.index[i], df.iloc[i]['Low'], 'support'))
         elif (display_data.iloc[i]['High'] < display_data.iloc[i-1]['High'] and display_data.iloc[i]['High'] < display_data.iloc[i+1]['High']):
             levels.append((display_data.index[i], display_data.iloc[i]['High'], 'resistance'))
@@ -320,7 +320,7 @@ def isFar(value, levels, display_data):
 levels = find_levels(display_data)
 
 # remove levels that are too close to existing levels
-filtered_levels = [(x, y) for x, y, _ in levels if is_far_from_level(y, levels, display_data)]
+filtered_levels = [(x, y) for x, y, _ in levels if isFar(y, levels, display_data)]
 
 # create the scatter traces for resistance and support levels
 resistance_trace = go.Scatter(x=[x[0] for x in filtered_levels if x[2] == 'resistance'],
