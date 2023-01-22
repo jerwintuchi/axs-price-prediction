@@ -1,5 +1,7 @@
 from datetime import date, timedelta
 from plotly import graph_objs as go
+from mpl_finance import candlestick_ohlc
+import matplotlib.dates as mpl_dates
 import pandas as pd, numpy as np, streamlit as st, yfinance as yf, pandas_ta as ta
 #from cmc_api import live_price, daily_change, weekly_change, marketcap, week_before, past_month, daily_volume, daily_volume_change
 import requests
@@ -196,12 +198,50 @@ fig.add_trace(go.Scatter(x=display_data.Date,
                         opacity=0.7, 
                         line=dict(color='red', width=2), 
                         name='5d MA'))
-fig2 = go.Figure()
+fig2 = go.Figure() #RSI Chart
 fig2.add_trace(go.Scatter(x=display_data.Date, y=display_data.ksi, name="RSI", line=dict(color="#0095e8", width=3)))
 fig2.layout.update(title="RSI")
 fig2.update_xaxes(griddash='dash', gridwidth=0, gridcolor='#535566')
 fig2.update_yaxes(griddash='dash', gridwidth=0, gridcolor='#535566')
 st.plotly_chart(fig2, True)
+
+"""
+Function for the maderpaking SUPPORT and RESISTANCE levels using fractal candlestick pattern
+"""
+def supportlvl(display_data,i):
+    #if the previous 2 candles(1st and 2nd candle) is less than the 3rd candle (df['Low'][i]) and the succeeding 2 candles is greater than 3rd candle (df['Low'][i])
+    #then it is the supportlvl
+  support = display_data['Low'][i] < display_data['Low'][i-1] and display_data['Low'][i] < display_data['Low'][i+1] and display_data['Low'][i+1] < display_data['Low'][i+2] and display_data['Low'][i-1] < display_data['Low'][i-2]
+  return support
+
+def resistancelvl(df,i):
+    #same logic with supportlvl except that it is reversed
+  resistance = display_data['High'][i] > display_data['High'][i-1]  and display_data['High'][i] > display_data['High'][i+1] and display_data['High'][i+1] > display_data['High'][i+2] and display_datadf['High'][i-1] > display_data['High'][i-2]
+  return resistance
+
+#list containing each level (S or R) where each level is a tuple that its first element is the index of the signal candle and the second being the price value
+levels = []
+for i in range(2,display_data.shape[0]-2):
+  if supportlvl(df,i):
+    levels.append((i,display_data['Low'][i]))
+  elif resistancelvl(df,i):
+    levels.append((i,display_data['High'][i]))
+
+#Plotting the Support and Resistance Levels
+def plot_sr():
+  fig = go.Figure()
+  fig, ax = plt.subplots()
+  fig.add_trace(go.Scatter(ax,display_data.values,width=0.6, 
+                   colorup='green', colordown='red', alpha=0.8))
+  date_format = mpl_dates.DateFormatter('%d %b %Y')
+  ax.xaxis.set_major_formatter(date_format)
+  fig.autofmt_xdate()
+  fig.tight_layout()
+  for level in levels:
+    fig.addhline(level[1],xmin=df['Date'][level[0]],
+               xmax=max(df['Date']),colors='blue')
+  fig.show()
+
 
 
 # fig2.add_trace(go.Scatter(x=display_data_w.Date, y=display_data_w.Close, name="Price"))
@@ -277,7 +317,7 @@ def display_forecast(forecast):
                          name='4d MA'))
 
     
-    
+# BUY/SELL SIGNAL (OMMITED)    
 #     for month in forecast_months[:3]:
 #         fig.add_annotation(
 #         x=month.DATE[month.lstm_default.idxmin()],
