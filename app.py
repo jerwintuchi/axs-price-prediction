@@ -269,11 +269,26 @@ fig3 = go.Figure()
 fig3.add_trace(go.Candlestick(x=display_data['Date'], open=display_data['Open'], high=display_data['High'], low=display_data['Low'], close=display_data['Close']))
 
 # Add support levels to the figure
-fig3.add_trace(go.Scatter(x=[display_data['Date'][i] for i in range(2, len(display_data)-2) if display_data['Low'][i] in support], y=support, name="Support", mode='markers', marker=dict(color='green')))
+for i in support:
+    fig.add_shape(
+        type='line',
+        x0=display_data['Date'].iloc[0],
+        y0=i,
+        x1=display_data['Date'].iloc[-1],
+        y1=i,
+        line=dict(color='green', width=2, dash='dash')
+    )
 
 # Add resistance levels to the figure
-fig3.add_trace(go.Scatter(x=[display_data['Date'][i] for i in range(2, len(display_data)-2) if display_data['High'][i] in resistance], y=resistance, name="Resistance", mode='markers', marker=dict(color='red')))
-
+for i in resistance:
+    fig.add_shape(
+        type='line',
+        x0=display_data['Date'].iloc[0],
+        y0=i,
+        x1=display_data['Date'].iloc[-1],
+        y1=i,
+        line=dict(color='red', width=2, dash='dash')
+    )
 fig3.update_xaxes(griddash='dash', gridwidth=1, gridcolor='#535566')
 fig3.update_yaxes(griddash='dash', gridwidth=1, gridcolor='#535566')
 fig3.update_layout(height=800)
