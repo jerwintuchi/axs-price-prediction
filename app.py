@@ -259,7 +259,7 @@ resistance = []
 # Iterate through the dataframe
 for i in range(2, len(display_data)-2):
     if (display_data['Low'][i] < display_data['Low'][i-1]) and (display_data['Low'][i] < display_data['Low'][i+1]) and (display_data['Low'][i+1] < display_data['Low'][i+2]) and (display_data['Low'][i-1] < display_data['Low'][i-2]):
-        support.append(df['Low'][i])
+        support.append(display_data['Low'][i])
     if (display_data['High'][i] > display_data['High'][i-1]) and (display_data['High'][i] > display_data['High'][i+1]) and (display_data['High'][i+1] > display_data['High'][i+2]) and (display_data['High'][i-1] > display_data['High'][i-2]):
         resistance.append(display_data['High'][i])
 
