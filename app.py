@@ -275,13 +275,26 @@ for i in range(2, len(display_data)-2):
         resistance.append(display_data['High'][i])
 
 """
+def isFar(l):
+   return np.sum([abs(l-x) < s  for x in levels]) == 0
+
+s =  np.mean(display_data['High'] - display_data['Low']) #volatility
 
 levels = []
 for i in range(2,display_data.shape[0]-2):
   if supportlvl(display_data,i):
     levels.append((i,display_data['Low'][i]))
+    if isFar(l):
+      levels.append((i,l))
   elif resistancelvl(display_data,i):
     levels.append((i,display_data['High'][i]))
+    if isFar(l):
+      levels.append((i,l))
+
+
+
+
+
 
 # Create a Plotly figure
 fig3 = go.Figure()
