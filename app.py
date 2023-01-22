@@ -357,6 +357,7 @@ for i, high in levels:
 fig3.update_xaxes(griddash='dash', gridwidth=1, gridcolor='#535566')
 fig3.update_yaxes(griddash='dash', gridwidth=1, gridcolor='#535566')
 fig3.update_layout(height=800)
+fig3.show()
 st.plotly_chart(fig3, True)
 
 # fig2.add_trace(go.Scatter(x=display_data_w.Date, y=display_data_w.Close, name="Price"))
