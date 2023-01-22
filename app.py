@@ -263,19 +263,31 @@ def resistancelvl(display_data,i):
   resistance = display_data['High'][i] > display_data['High'][i-1]  and display_data['High'][i] > display_data['High'][i+1] and display_data['High'][i+1] > display_data['High'][i+2] and display_data['High'][i-1] > display_data['High'][i-2]
   return resistance
 
+levels = []
+for i in range(2,df.shape[0]-2):
+  if supportlvl(display_data,i):
+    levels.append((i,display_data['Low'][i]))
+  elif resistancelvl(display_data,i):
+    levels.append((i,display_data['High'][i]))
+
 # Calculate support and resistance levels
-supp = supportlvl(display_data.Low)
-resist = resistancelvl(display_data.High)
+#support = supportlvl(display_data.Low)
+#resistance = resistancelvl(display_data.High)
 
 # Create a Plotly figure
 fig3 = go.Figure()
 fig3.add_trace(go.Candlestick(x=display_data.Date, open=display_data.Open, high=display_data.High, low=display_data.Low, close=display_data.Close))
 
 # Add support and resistance levels to the figure
-fig3.add_trace(go.Scatter(x=display_data.Date, y=supp, name="Support", line=dict(color='green')))
-fig3.add_trace(go.Scatter(x=display_data.Date, y=resist, name="Resistance", line=dict(color='red')))
+fig3.add_trace(go.Scatter(x=display_data.Date))
+fig3.add_trace(go.Scatter(x=display_data.Date))
 fig3.update_xaxes(griddash='dash', gridwidth=1, gridcolor='#535566')
 fig3.update_yaxes(griddash='dash', gridwidth=1, gridcolor='#535566')
+
+for level in levels:
+    fig3.add_hline(level[1],xmin=display_data['Date'][level[0]],
+    xmax=max(display_data.Date),colors='blue')
+
 fig3.update_layout(height=800)
 
 #fig3.show()
