@@ -326,27 +326,27 @@ for i in range(2, display_data.shape[0] - 2):
 threshold = 0.05
 
 # Add support levels to the figure
-        for i, low in levels:
-            if low == display_data['Low'][i]:
-                fig3.add_shape(
-                    type='line',
-                    x0=display_data['Date'].iloc[0],
-                    y0=support[i],
-                    x1=display_data['Date'].iloc[-1],
-                    y1=support[i],
-                    line=dict(color='green', width=2, dash='dash')
+for i, low in levels:
+    if low == display_data['Low'][i]:
+        fig3.add_shape(
+            type='line',
+            x0=display_data['Date'].iloc[0],
+            y0=support[i],
+            x1=display_data['Date'].iloc[-1],
+            y1=support[i],
+            line=dict(color='green', width=2, dash='dash')
         )
 
 # Add resistance levels to the figure
-        for i, high in levels:
-            if high == display_data['High'][i]:
-                fig3.add_shape(
-                    type='line',
-                    x0=display_data['Date'].iloc[0],
-                    y0=resistance[i],
-                    x1=display_data['Date'].iloc[-1],
-                    y1=resistance[i],
-                    line=dict(color='red', width=2, dash='dash')
+for i, high in levels:
+    if high == display_data['High'][i]:
+        fig3.add_shape(
+            type='line',
+            x0=display_data['Date'].iloc[0],
+            y0=resistance[i],
+            x1=display_data['Date'].iloc[-1],
+            y1=resistance[i],
+            line=dict(color='red', width=2, dash='dash')
         )
 
 # Removing duplicates values
