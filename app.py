@@ -264,7 +264,7 @@ def resistancelvl(display_data,i):
   return resistance
 
 levels = []
-for i in range(2,df.shape[0]-2):
+for i in range(2,display_data.shape[0]-2):
   if supportlvl(display_data,i):
     levels.append((i,display_data['Low'][i]))
   elif resistancelvl(display_data,i):
