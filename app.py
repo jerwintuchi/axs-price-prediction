@@ -298,7 +298,7 @@ for i in range(2, display_data.shape[0] - 2):
 # function to identify support and resistance levels
 def find_levels(display_data):
     levels = []
-    for i in range(1, df.shape[0]-1):
+    for i in range(1, display_data.shape[0]-1):
         if (display_data.iloc[i]['Low'] > ddisplay_data.iloc[i-1]['Low'] and display_data.iloc[i]['Low'] > display_data.iloc[i+1]['Low']):
             levels.append((df.index[i], df.iloc[i]['Low'], 'support'))
         elif (display_data.iloc[i]['High'] < display_data.iloc[i-1]['High'] and display_data.iloc[i]['High'] < display_data.iloc[i+1]['High']):
