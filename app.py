@@ -269,7 +269,7 @@ fig3 = go.Figure()
 fig3.add_trace(go.Candlestick(x=display_data['Date'], open=display_data['Open'], high=display_data['High'], low=display_data['Low'], close=display_data['Close']))
 
 # Create a threshold variable to set the minimum distance between lines
-threshold = 0.05
+threshold = 2
 
 # Add support levels to the figure
 for i in range(len(support)):
