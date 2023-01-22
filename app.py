@@ -227,7 +227,7 @@ for i in range(2,display_data.shape[0]-2):
     levels.append((i,display_data['High'][i]))
 
 #Plotting the Support and Resistance Levels
-def plot_sr():
+def plot_sr(levels,display_data):
   fig = go.Figure()
   fig, ax = plt.subplots()
   fig.add_trace(go.Scatter(ax,display_data.values,width=0.6, 
@@ -240,6 +240,7 @@ def plot_sr():
     fig.addhline(level[1],xmin=display_data['Date'][level[0]],
                xmax=max(display_data['Date']),colors='blue')
   fig.show()
+
   plot_sr()
 
 
