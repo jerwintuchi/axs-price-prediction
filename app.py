@@ -299,26 +299,6 @@ for i in range(len(resistance)):
 support = list(set(support))
 resistance = list(set(resistance))
 
-# Add support levels again to the figure
-for i in range(len(support)):
-    fig3.add_shape(
-        type='line',
-        x0=display_data['Date'].iloc[0],
-        y0=support[i],
-        x1=display_data['Date'].iloc[-1],
-        y1=support[i],
-        line=dict(color='green', width=2, dash='dash')
-)
-
-#Add resistance levels again to the figure
-for i in range(len(resistance)):
-    fig3.add_shape(
-        type='line',
-        x0=display_data['Date'].iloc[0],
-        y0=resistance[i],
-        x1=display_data['Date'].iloc[-1],
-        y1=resistance[i],
-        line=dict(color='red', width=2, dash='dash'))
 
 fig3.update_xaxes(griddash='dash', gridwidth=1, gridcolor='#535566')
 fig3.update_yaxes(griddash='dash', gridwidth=1, gridcolor='#535566')
