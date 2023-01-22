@@ -314,7 +314,7 @@ levels = []
 # Iterate through the dataframe
 for i in range(2, display_data.shape[0] - 2):
     if supportlvl(display_data, i):
-        low = df['Low'][i]
+        low = display_data['Low'][i]
         if isFar(low, levels, display_data):
             levels.append((i, low))
     elif resistancelvl(display_data, i):
