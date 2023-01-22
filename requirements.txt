@@ -8,3 +8,4 @@ newspaper3k
 yfinance == 0.1.74
 plotly
 pandas_ta
+matplotlib
