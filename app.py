@@ -285,16 +285,26 @@ for i in range(len(resistance)):
 support = list(set(support))
 resistance = list(set(resistance))
 
-# DRAW REC
-fig3.update_layout(dragmode='drawrect')
-fig3.show(config={'modeBarButtonsToAdd':['drawline',
-                                        'drawopenpath',
-                                        'drawclosedpath',
-                                        'drawcircle',
-                                        'drawrect',
-                                        'eraseshape'
-                                       ]})
-
+#Edit BUTTONS
+fig3.update_layout(
+    updatemenus=[
+        dict(
+            buttons=list([
+                dict(
+                    args=[None, {"modeBarButtonsToAdd": ["drawline", "drawopenpath", "drawclosedpath", "drawcircle", "drawrect", "eraseshape"]}],
+                    label="Drawing",
+                    method="update"
+                ),
+            ]),
+            type="buttons",
+            showactive=True,
+            x=0.1,
+            xanchor="left",
+            y=1.2,
+            yanchor="top"
+        ),
+    ]
+)
 
 fig3.update_xaxes(griddash='dash', gridwidth=1, gridcolor='#535566')
 fig3.update_yaxes(griddash='dash', gridwidth=1, gridcolor='#535566')
