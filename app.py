@@ -266,15 +266,6 @@ def resistancelvl(display_data,i):
 # Initialize empty lists for support and resistance levels
 support = []
 resistance = []
-""""
-# Iterate through the dataframe
-for i in range(2, len(display_data)-2):
-    if (display_data['Low'][i] < display_data['Low'][i-1]) and (display_data['Low'][i] < display_data['Low'][i+1]) and (display_data['Low'][i+1] < display_data['Low'][i+2]) and (display_data['Low'][i-1] < display_data['Low'][i-2]):
-        support.append(display_data['Low'][i])
-    if (display_data['High'][i] > display_data['High'][i-1]) and (display_data['High'][i] > display_data['High'][i+1]) and (display_data['High'][i+1] > display_data['High'][i+2]) and (display_data['High'][i-1] > display_data['High'][i-2]):
-        resistance.append(display_data['High'][i])
-
-"""
 
 def isFar(value, levels, display_data):
     ave = np.mean(display_data['High'] - display_data['Low'])
@@ -300,16 +291,26 @@ fig3.add_trace(go.Candlestick(x=display_data['Date'], open=display_data['Open'],
 
 # Create a threshold variable to set the minimum distance between lines
 threshold = 0.05
+# Group the support levels that are close to each other
+support_groups = support.groupby(pd.cut(support, np.arange(min(support), max(support) + threshold, threshold)))
 
+# Take the mean of each group to get a single level that represents the group
+filtered_support = support_groups.mean()
+
+# Group the resistance levels that are close to each other
+resistance_groups = resistance.groupby(pd.cut(resistance, np.arange(min(resistance), max(resistance) + threshold, threshold)))
+
+# Take the mean of each group to get a single level that represents the group
+filtered_resistance = resistance_groups.mean()
 
 # Add support levels to the figure
 for i in range(len(support)):
     fig3.add_shape(
         type='line',
         x0=display_data['Date'].iloc[0],
-        y0=support[i],
+        y0=filtered_support[i],
         x1=display_data['Date'].iloc[-1],
-        y1=support[i],
+        y1=filtered_support[i],
         line=dict(color='green', width=1, dash='dot')
     )
 
@@ -318,9 +319,9 @@ for i in range(len(resistance)):
     fig3.add_shape(
         type='line',
         x0=display_data['Date'].iloc[0],
-        y0=resistance[i],
+        y0=filtered_resistance[i],
         x1=display_data['Date'].iloc[-1],
-        y1=resistance[i],
+        y1=filtered_resistance[i],
         line=dict(color='red', width=1, dash='dot')
     )
 
