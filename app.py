@@ -296,9 +296,9 @@ threshold = 0.05
 for level in levels:        
     fig3.add_shape(
         type='line',
-        x0=df['Date'][level[0]],
+        x0=display_data['Date'][level[0]],
         y0=level[1],
-        x1=max(df['Date']),
+        x1=max(display_data['Date']),
         y1=level[1],
         line=dict(color='blue', width=1, dash='dash')
     )
@@ -307,9 +307,9 @@ for level in levels:
 for level in levels:        
     fig3.add_shape(
         type='line',
-        x0=df['Date'][level[0]],
+        x0=display_data['Date'][level[0]],
         y0=level[1],
-        x1=max(df['Date']),
+        x1=max(display_data['Date']),
         y1=level[1],
         line=dict(color='blue', width=1, dash='dash')
     )
