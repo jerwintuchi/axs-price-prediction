@@ -251,6 +251,10 @@ def plot_sr(levels,display_data):
   plot_sr(levels,display_data)
 
 """
+# Initialize empty lists for support and resistance levels
+support = []
+resistance = []
+
 
 def supportlvl(display_data,i):
     #if the previous 2 candles(1st and 2nd candle) is less than the 3rd candle (df['Low'][i]) and the succeeding 2 candles is greater than 3rd candle (df['Low'][i])
@@ -264,9 +268,6 @@ def resistancelvl(display_data,i):
   return resistance
 
 
-# Initialize empty lists for support and resistance levels
-support = []
-resistance = []
 
 def isFar(value, levels, display_data):
     ave = np.mean(display_data['High'] - display_data['Low'])
@@ -309,8 +310,6 @@ for i in range(len(support)):
 
 # Add resistance levels to the figure
 for i in range(len(resistance)):
-    print(display_data.loc[display_data['Low']==support[i]].index[0])
-    print(display_data.loc[display_data['High']==resistance[i]].index[0])
     start_index = display_data.loc[display_data['High'] == resistance[i]].index[0]
     end_index = start_index + display_data.loc[display_data['High'] == resistance[i]].shape[0] - 1
     x0 = display_data['Date'][start_index]
