@@ -286,6 +286,7 @@ support = list(set(support))
 resistance = list(set(resistance))
 
 # DRAW REC
+fig3.update_layout(dragmode='drawrect')
 fig3.show(config={'modeBarButtonsToAdd':['drawline',
                                         'drawopenpath',
                                         'drawclosedpath',
