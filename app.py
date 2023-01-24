@@ -242,16 +242,6 @@ fig3 = go.Figure()
 # Add a candlestick chart of the data
 fig3.add_trace(go.Candlestick(x=display_data['Date'], open=display_data['Open'], high=display_data['High'], low=display_data['Low'], close=display_data['Close']))
 
-text="Support And Resistance Levels"
-fig.add_annotation(
-            x=0.025,
-            y=0.5,
-            text=text,
-            xref="paper",
-            yref="paper",
-            showarrow=False,
-            font_size=20
-)
 
 # Create a threshold variable to set the minimum distance between lines
 threshold = 0.05
@@ -298,6 +288,7 @@ resistance = list(set(resistance))
 
 fig3.update_xaxes(griddash='dash', gridwidth=1, gridcolor='#535566')
 fig3.update_yaxes(griddash='dash', gridwidth=1, gridcolor='#535566')
+fig2.layout.update(title="Support and Resistance Levels",size=10)
 fig3.update_layout(height=1000)
 st.plotly_chart(fig3, True)
 
