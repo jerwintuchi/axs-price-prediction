@@ -204,53 +204,7 @@ fig2.update_xaxes(griddash='dash', gridwidth=0, gridcolor='#535566')
 fig2.update_yaxes(griddash='dash', gridwidth=0, gridcolor='#535566')
 st.plotly_chart(fig2, True)
 
-"""
-
-Function for the maderpaking SUPPORT and RESISTANCE levels using fractal candlestick pattern
-
-def supportlvl(display_data,i):
-    #if the previous 2 candles(1st and 2nd candle) is less than the 3rd candle (df['Low'][i]) and the succeeding 2 candles is greater than 3rd candle (df['Low'][i])
-    #then it is the supportlvl
-  support = display_data['Low'][i] < display_data['Low'][i-1] and display_data['Low'][i] < display_data['Low'][i+1] and display_data['Low'][i+1] < display_data['Low'][i+2] and display_data['Low'][i-1] < display_data['Low'][i-2]
-  return support
-
-def resistancelvl(display_data,i):
-    #same logic with supportlvl except that it is reversed
-  resistance = display_data['High'][i] > display_data['High'][i-1]  and display_data['High'][i] > display_data['High'][i+1] and display_data['High'][i+1] > display_data['High'][i+2] and display_data['High'][i-1] > display_data['High'][i-2]
-  return resistance
-"""
-"""
-#list containing each level (S or R) where each level is a tuple that its first element is the index of the signal candle and the second being the price value
-levels = []
-for i in range(2,display_data.shape[0]-2):
-  if supportlvl(display_data,i):
-    levels.append((i,display_data['Low'][i]))
-  elif resistancelvl(display_data,i):
-    levels.append((i,display_data['High'][i]))
-
-#Plotting the Support and Resistance Levels
-def plot_sr(levels,display_data):
-  fig = go.Figure()
-  fig, ax = plt.subplots()
-  fig.add_trace(go.Scatter(ax,display_data.values,width=0.6, 
-                   colorup='green', colordown='red', alpha=0.8))
-  fig.layout.update(title="AXS-USD (1d Intervals)")
-  fig.update_xaxes(griddash='dash', gridwidth=1, gridcolor='#535566')
-  fig.update_yaxes(griddash='dash', gridwidth=1, gridcolor='#535566')
-  fig.update_layout(height=800)      
-
-  date_format = mpl_dates.DateFormatter('%d %b %Y')
-  ax.xaxis.set_major_formatter(date_format)
-  fig.autofmt_xdate()
-  fig.tight_layout()
-  for level in levels:
-    fig.add_hline(level[1],xmin=display_data['Date'][level[0]],
-               xmax=max(display_data['Date']),colors='blue')
-  fig.show()
-
-  plot_sr(levels,display_data)
-
-"""
+#====================================================SUPPORT AND RESISTANCE==========================================================
 
 def supportlvl(display_data,i):
     #if the previous 2 candles(1st and 2nd candle) is less than the 3rd candle (df['Low'][i]) and the succeeding 2 candles is greater than 3rd candle (df['Low'][i])
@@ -294,39 +248,35 @@ threshold = 0.05
 
 # Add support levels to the figure
 for i in range(len(support)):
-    index = display_data.loc[display_data['Low']==support[i]].index[0]
-    try:
-        next_support = support[i+1]
-        next_support_index = display_data.loc[display_data['Low']==next_support].index[0]
-        x1 = display_data['Date'][next_support_index]
-    except:
+    support_index = display_data.loc[display_data['Low']==support[i]].index[0]
+    if support_index + display_data.loc[display_data['Low']==support[i]].shape[0] < display_data.shape[0]:
+        x1 = display_data['Date'][support_index + display_data.loc[display_data['Low']==support[i]].shape[0]]
+    else:
         x1 = display_data['Date'].iloc[-1]
     fig3.add_shape(
         type='line',
-        x0=display_data['Date'][index],
+        x0=display_data['Date'][support_index],
         y0=support[i],
         x1=x1,
         y1=support[i],
         line=dict(color='green', width=1, dash='dot')
     )
+
 # Add resistance levels to the figure
 for i in range(len(resistance)):
-    indexr = display_data.loc[display_data['High']==resistance[i]].index[0]
-    try:
-        next_resistance = resistance[i+1]
-        next_resistance_index = display_data.loc[display_data['High']==next_resistance].index[0]
-        x1 = display_data['Date'][next_resistance_index]
-    except:
+    resistance_index = display_data.loc[display_data['High']==resistance[i]].index[0]
+    if resistance_index + display_data.loc[display_data['High']==resistance[i]].shape[0] < display_data.shape[0]:
+        x1 = display_data['Date'][resistance_index + display_data.loc[display_data['High']==resistance[i]].shape[0]]
+    else:
         x1 = display_data['Date'].iloc[-1]
     fig3.add_shape(
         type='line',
-        x0=display_data['Date'][indexr],
+        x0=display_data['Date'][resistance_index],
         y0=resistance[i],
         x1=x1,
         y1=resistance[i],
-        line=dict(color='green', width=1, dash='dot')
+        line=dict(color='red', width=1, dash='dot')
     )
-
 # Removing duplicates values
 support = list(set(support))
 resistance = list(set(resistance))
