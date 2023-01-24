@@ -294,35 +294,31 @@ threshold = 0.05
 
 # Add support levels to the figure
 for i in range(len(support)):
-    try:
-        index = display_data.loc[display_data['Low']==support[i]].index[0]
-        x1 = display_data['Date'][index + display_data.loc[display_data['Low']==support[i]].shape[0]]
-        fig3.add_shape(
-            type='line',
-            x0=display_data['Date'][index],
-            y0=support[i],
-            x1=x1,
-            y1=support[i],
-            line=dict(color='green', width=1, dash='dot')
-        )
-    except IndexError:
-        pass
+    index = display_data.loc[display_data['Low']==support[i]].index[0]
+    # Find the next index where the low is not equal to the current support level
+    next_index = index + display_data.loc[display_data['Low'][index+1:].ne(support[i])].index[0]
+    fig3.add_shape(
+        type='line',
+        x0=display_data['Date'][index],
+        y0=support[i],
+        x1=display_data['Date'][next_index],
+        y1=support[i],
+        line=dict(color='green', width=1, dash='dot')
+    )
 
 # Add resistance levels to the figure
 for i in range(len(resistance)):
-    try:
-        index = display_data.loc[display_data['High']==resistance[i]].index[0]
-        x1 = display_data['Date'][index + display_data.loc[display_data['High']==resistance[i]].shape[0]]
-        fig3.add_shape(
-            type='line',
-            x0=display_data['Date'][index],
-            y0=resistance[i],
-            x1=x1,
-            y1=resistance[i],
-            line=dict(color='green', width=1, dash='dot')
-        )
-    except IndexError:
-        pass
+    index = display_data.loc[display_data['High']==resistance[i]].index[0]
+    # Find the next index where the high is not equal to the current resistance level
+    next_index = index + display_data.loc[display_data['High'][index+1:].ne(resistance[i])].index[0]
+    fig3.add_shape(
+        type='line',
+        x0=display_data['Date'][index],
+        y0=resistance[i],
+        x1=display_data['Date'][next_index],
+        y1=resistance[i],
+        line=dict(color='red', width=1, dash='dot')
+    )
 
 # Removing duplicates values
 support = list(set(support))
