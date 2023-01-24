@@ -277,8 +277,8 @@ for i in range(2, len(display_data)-2):
 """
 
 #Annotation for support and resistance when hovered by mouse
-x_mid = (display_data['Date'].iloc[0] + display_data['Date'].iloc[-1])/2
-y_mid = (resistance[i])
+x_mid = (np.datetime64(display_data['Date'].iloc[0]) + np.datetime64(display_data['Date'].iloc[-1]))/2
+y_mid = resistance[i]
 annotations=[dict(x=x_mid, y=y_mid, text='Resistance Line', showarrow=False, hovertext='Resistance Line')]
 layout = go.Layout(annotations=annotations)
 
