@@ -285,6 +285,27 @@ for i in range(len(resistance)):
 support = list(set(support))
 resistance = list(set(resistance))
 
+# DRAW REC
+fig.add_shape(line_color='yellow',
+              fillcolor='orange',
+              opacity=0.4,
+              editable=True,
+              x0=0, x1=1, y0=2, y1=3,
+              xref='x', yref='y'
+)
+fig.update_layout(dragmode='drawrect',
+                  # style of new shapes
+                  newshape=dict(line_color='yellow',
+                                fillcolor='turquoise',
+                                opacity=0.5))
+fig.show(config={'modeBarButtonsToAdd':['drawline',
+                                        'drawopenpath',
+                                        'drawclosedpath',
+                                        'drawcircle',
+                                        'drawrect',
+                                        'eraseshape'
+                                       ]})
+
 
 fig3.update_xaxes(griddash='dash', gridwidth=1, gridcolor='#535566')
 fig3.update_yaxes(griddash='dash', gridwidth=1, gridcolor='#535566')
