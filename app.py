@@ -305,24 +305,26 @@ resistance_series = pd.Series(resistance)
 resistance_groups = resistance_series.groupby(pd.cut(resistance_series, np.arange(min(resistance), max(resistance) + threshold, threshold)))
 
 # Add support levels to the figure
-for i in range(len(support)):
+for key,value in support_groups.groups.items():
+    support_level = key.left # left value of the bin range
     fig3.add_shape(
         type='line',
         x0=display_data['Date'].iloc[0],
-        y0=support_groups[i],
+        y0=support_level,
         x1=display_data['Date'].iloc[-1],
-        y1=support_groups[i],
+        y1=support_level,
         line=dict(color='green', width=1, dash='dot')
     )
 
 # Add resistance levels to the figure
-for i in range(len(resistance)):
+for key,value in resistance_groups.groups.items():
+    resistance_level = key.left # left value of the bin range
     fig3.add_shape(
         type='line',
         x0=display_data['Date'].iloc[0],
-        y0=resistance_groups[i],
+        y0=resistance_level,
         x1=display_data['Date'].iloc[-1],
-        y1=resistance_groups[i],
+        y1=resistance_level,
         line=dict(color='red', width=1, dash='dot')
     )
 
