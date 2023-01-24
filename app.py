@@ -266,7 +266,10 @@ def resistancelvl(display_data,i):
     #same logic with supportlvl except that it is reversed
   resistance = display_data['High'][i] > display_data['High'][i-1]  and display_data['High'][i] > display_data['High'][i+1] and display_data['High'][i+1] > display_data['High'][i+2] and display_data['High'][i-1] > display_data['High'][i-2]
   return resistance
-
+for i in range(support):
+    print(support[i])
+for i in range(resistance):
+    print(resistance[i])
 
 
 def isFar(value, levels, display_data):
