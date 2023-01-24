@@ -291,26 +291,27 @@ fig3.add_trace(go.Candlestick(x=display_data['Date'], open=display_data['Open'],
 
 # Create a threshold variable to set the minimum distance between lines
 threshold = 0.05
+# Convert the support list to a pandas Series
+support_series = pd.Series(support)
+
 # Group the support levels that are close to each other
-support_np = np.array(support)
+support_groups = support_series.groupby(pd.cut(support_series, np.arange(min(support), max(support) + threshold, threshold)))
 
-# Take the mean of each group to get a single level that represents the group
-filtered_support, _ = np.histogram(support_np, bins=np.arange(min(support), max(support) + threshold, threshold))
 
-resistance_np = np.array(resistance)
+# Convert the support list to a pandas Series
+resistance_series = pd.Series(resistance)
 
-# Take the mean of each group to get a single level that represents the group
-filtered_resistance, _ = np.histogram(resistance_np, bins=np.arange(min(resistance), max(resistance) + threshold, threshold))
-
+# Group the support levels that are close to each other
+resistance_groups = resistance_series.groupby(pd.cut(resistance_series, np.arange(min(resistance), max(resistance) + threshold, threshold)))
 
 # Add support levels to the figure
 for i in range(len(support)):
     fig3.add_shape(
         type='line',
         x0=display_data['Date'].iloc[0],
-        y0=filtered_support[i],
+        y0=support_groups[i],
         x1=display_data['Date'].iloc[-1],
-        y1=filtered_support[i],
+        y1=support_groups[i],
         line=dict(color='green', width=1, dash='dot')
     )
 
@@ -319,9 +320,9 @@ for i in range(len(resistance)):
     fig3.add_shape(
         type='line',
         x0=display_data['Date'].iloc[0],
-        y0=filtered_resistance[i],
+        y0=resistance_groups[i],
         x1=display_data['Date'].iloc[-1],
-        y1=filtered_resistance[i],
+        y1=resistance_groups[i],
         line=dict(color='red', width=1, dash='dot')
     )
 
