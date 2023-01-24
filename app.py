@@ -294,24 +294,24 @@ threshold = 0.05
 
 # Add support levels to the figure
 for level in levels:        
-    fig.add_shape(
+    fig3.add_shape(
         type='line',
         x0=df['Date'][level[0]],
         y0=level[1],
-        x1=max(display_data['Date']),
+        x1=max(df['Date']),
         y1=level[1],
         line=dict(color='blue', width=1, dash='dash')
     )
 
 # Add resistance levels to the figure
 for level in levels:        
-    fig.add_shape(
+    fig3.add_shape(
         type='line',
-        x0=display_data['Date'][level[0]],
+        x0=df['Date'][level[0]],
         y0=level[1],
-        x1=max(display_data['Date']),
+        x1=max(df['Date']),
         y1=level[1],
-        line=dict(color='red', width=1, dash='dash')
+        line=dict(color='blue', width=1, dash='dash')
     )
 
 # Removing duplicates values
