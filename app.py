@@ -275,8 +275,19 @@ for i in range(2, len(display_data)-2):
         resistance.append(display_data['High'][i])
 
 """
+
+# Create a threshold variable to set the minimum distance between lines
+threshold = 0.05
+
 #initializing empty list for annotation
 annotations = []
+
+
+for i in range(len(support)):
+    if i == 0 or support[i] - support[i-1] > threshold:
+        x_mid = (display_data['Date'].iloc[0] + display_data['Date'].iloc[-1])/2
+        y_mid = support[i]
+        annotations.append(dict(x=x_mid, y=y_mid, xref='x', yref='y', text='Support Level', showarrow=False))
 
 for i in range(len(resistance)):
     if i == 0 or resistance[i] - resistance[i-1] > threshold:
@@ -284,7 +295,7 @@ for i in range(len(resistance)):
         y_mid = resistance[i]
         annotations.append(dict(x=x_mid, y=y_mid, xref='x', yref='y', text='Resistance Level', showarrow=False))
 
-layout = go.Layout(annotations=annotations)
+layout = go.Layout(annotations=annotations) 
 
 fig3 = go.Figure(data=data, layout=layout)
 
@@ -309,9 +320,6 @@ for i in range(2, display_data.shape[0] - 2):
         high = display_data['High'][i]
         if isFar(high, levels, display_data):
             resistance.append(high)
-
-# Create a threshold variable to set the minimum distance between lines
-threshold = 0.05
 
 
 # Add support levels to the figure
