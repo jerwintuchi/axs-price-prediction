@@ -276,10 +276,14 @@ for i in range(2, len(display_data)-2):
 
 """
 
-
+#Annotation for support and resistance when hovered by mouse
+x_mid = (display_data['Date'].iloc[0] + display_data['Date'].iloc[-1])/2
+y_mid = (resistance[i])
+annotations=[dict(x=x_mid, y=y_mid, text='Resistance Line', showarrow=False, hovertext='Resistance Line')]
+layout = go.Layout(annotations=annotations)
 
 # Create a Plotly figure
-fig3 = go.Figure()
+fig3 = go.Figure(data=data, layout=layout)
 # Add a candlestick chart of the data
 fig3.add_trace(go.Candlestick(x=display_data['Date'], open=display_data['Open'], high=display_data['High'], low=display_data['Low'], close=display_data['Close']))
 
@@ -313,7 +317,7 @@ for i in range(len(support)):
             y0=support[i],
             x1=display_data['Date'].iloc[-1],
             y1=support[i],
-            line=dict(color='green', width=2, dash='dash',hovertext='Support: y = %{y}')
+            line=dict(color='green', width=2, dash='dash')
         )
 
 # Add resistance levels to the figure
@@ -325,7 +329,7 @@ for i in range(len(resistance)):
             y0=resistance[i],
             x1=display_data['Date'].iloc[-1],
             y1=resistance[i],
-            line=dict(color='red', width=2, dash='dash',hovertext='Resistance: y = %{y}')
+            line=dict(color='red', width=2, dash='dash')
         )
 
 # Removing duplicates values
