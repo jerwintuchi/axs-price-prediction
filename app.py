@@ -291,18 +291,6 @@ fig3.add_trace(go.Candlestick(x=display_data['Date'], open=display_data['Open'],
 
 # Create a threshold variable to set the minimum distance between lines
 threshold = 0.05
-# Convert the support list to a pandas Series
-support_series = pd.Series(support)
-
-# Group the support levels that are close to each other
-support_groups = support_series.groupby(pd.cut(support_series, np.arange(min(support), max(support) + threshold, threshold)))
-
-
-# Convert the support list to a pandas Series
-resistance_series = pd.Series(resistance)
-
-# Group the support levels that are close to each other
-resistance_groups = resistance_series.groupby(pd.cut(resistance_series, np.arange(min(resistance), max(resistance) + threshold, threshold)))
 
 # Add support levels to the figure
 for i in range(len(support)):
