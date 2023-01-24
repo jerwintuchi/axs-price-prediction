@@ -296,17 +296,15 @@ threshold = 0.05
 
 # Add support levels to the figure
 for i in range(len(support)):
-    start_index = display_data.loc[display_data['Low'] == resistance[i]].index[1]
-    end_index = start_index + display_data.loc[display_data['Low'] == support[i]].shape[1]
-    x0 = display_data['Date'][start_index]
-    x1 = display_data['Date'][end_index-1]
+    start_index = display_data.loc[display_data['Low'] == support[i]].index[0]
+    end_index = start_index + display_data.loc[display_data['Low'] == support[i]].shape[0]
     fig3.add_shape(
         type='line',
-        x0=x0,
+        x0=display_data['Date'][start_index],
         y0=support[i],
-        x1=x1,
+        x1=display_data['Date'][end_index],
         y1=support[i],
-        line=dict(color='red', width=1, dash='dot')
+        line=dict(color='green', width=1, dash='dot')
     )
 
 # Add resistance levels to the figure
