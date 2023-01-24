@@ -286,6 +286,7 @@ support = list(set(support))
 resistance = list(set(resistance))
 
 #Edit BUTTONS
+fig3.show(config={'modeBarButtonsToAdd': ['drawline', 'drawopenpath', 'drawclosedpath', 'drawcircle', 'drawrect', 'eraseshape']})
 fig3.update_layout(
     updatemenus=[
         dict(
