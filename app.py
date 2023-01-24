@@ -297,11 +297,11 @@ support_np = np.array(support)
 # Take the mean of each group to get a single level that represents the group
 filtered_support, _ = np.histogram(support_np, bins=np.arange(min(support), max(support) + threshold, threshold))
 
-# Group the resistance levels that are close to each other
-resistance_groups = resistance.groupby(pd.cut(resistance, np.arange(min(resistance), max(resistance) + threshold, threshold)))
+resistance_np = np.array(resistance)
 
 # Take the mean of each group to get a single level that represents the group
-filtered_resistance = resistance_groups.mean()
+filtered_resistance, _ = np.histogram(resistance_np, bins=np.arange(min(resistance), max(resistance) + threshold, threshold))
+
 
 # Add support levels to the figure
 for i in range(len(support)):
