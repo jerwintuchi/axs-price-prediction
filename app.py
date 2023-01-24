@@ -310,8 +310,8 @@ for i in range(len(support)):
 # Add resistance levels to the figure
 for i in range(len(resistance)):
     resistance_indices = np.where(display_data['Low'] == support[i])[0]
-    start_index = resistance_indices_indices[0]
-    end_index = resistance_indices_indices[-1]
+    start_index = resistance_indices[0]
+    end_index = resistance_indices[-1]
     fig3.add_shape(
         type='line',
         x0=display_data['Date'][start_index],
