@@ -297,9 +297,9 @@ for level in levels:
     fig3.add_shape(
         type='line',
         x0=display_data['Date'][level[0]],
-        y0=level[1],
+        y0=level[i],
         x1=max(display_data['Date']),
-        y1=level[1],
+        y1=level[i],
         line=dict(color='blue', width=1, dash='dash')
     )
 
@@ -308,9 +308,9 @@ for level in levels:
     fig3.add_shape(
         type='line',
         x0=display_data['Date'][level[0]],
-        y0=level[1],
+        y0=level[i],
         x1=max(display_data['Date']),
-        y1=level[1],
+        y1=level[i],
         line=dict(color='blue', width=1, dash='dash')
     )
 
@@ -322,7 +322,6 @@ resistance = list(set(resistance))
 fig3.update_xaxes(griddash='dash', gridwidth=1, gridcolor='#535566')
 fig3.update_yaxes(griddash='dash', gridwidth=1, gridcolor='#535566')
 fig3.update_layout(height=800)
-fig3.show()
 st.plotly_chart(fig3, True)
 
 # fig2.add_trace(go.Scatter(x=display_data_w.Date, y=display_data_w.Close, name="Price"))
