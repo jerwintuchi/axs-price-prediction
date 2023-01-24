@@ -278,7 +278,7 @@ for i in range(len(resistance)):
         y0=resistance[i],
         x1=x1,
         y1=resistance[i],
-        line=dict(color='green', width=1, dash='dot')
+        line=dict(color='red', width=1, dash='dot')
     )
 
 # Removing duplicates values
