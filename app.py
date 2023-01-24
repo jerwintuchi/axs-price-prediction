@@ -301,7 +301,7 @@ for i in range(2, display_data.shape[0] - 2):
             resistance.append(high)
 
 # Create a threshold variable to set the minimum distance between lines
-threshold = 2
+threshold = 0.05
 
 
 # Add support levels to the figure
@@ -313,8 +313,7 @@ for i in range(len(support)):
             y0=support[i],
             x1=display_data['Date'].iloc[-1],
             y1=support[i],
-            name='Support',
-            line=dict(color='green', width=2, dash='dash')
+            line=dict(color='green', width=2, dash='dash',hovertext='Support: y = %{y}')
         )
 
 # Add resistance levels to the figure
@@ -326,8 +325,7 @@ for i in range(len(resistance)):
             y0=resistance[i],
             x1=display_data['Date'].iloc[-1],
             y1=resistance[i],
-            name='Resistance',
-            line=dict(color='red', width=2, dash='dash')
+            line=dict(color='red', width=2, dash='dash',hovertext='Resistance: y = %{y}')
         )
 
 # Removing duplicates values
