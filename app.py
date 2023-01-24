@@ -293,25 +293,25 @@ fig3.add_trace(go.Candlestick(x=display_data['Date'], open=display_data['Open'],
 threshold = 0.05
 
 # Add support levels to the figure
-for level in levels:        
+for i in range(len(support)):
     fig3.add_shape(
         type='line',
-        x0=display_data['Date'][level[0]],
-        y0=level[i],
-        x1=max(display_data['Date']),
-        y1=level[i],
-        line=dict(color='blue', width=1, dash='dash')
+        x0=display_data['Date'].iloc[0],
+        y0=support[i],
+        x1=display_data['Date'].iloc[-1],
+        y1=support[i],
+        line=dict(color='green', width=1, dash='dot')
     )
 
 # Add resistance levels to the figure
-for level in levels:        
+for i in range(len(resistance)):
     fig3.add_shape(
         type='line',
-        x0=display_data['Date'][level[0]],
-        y0=level[i],
-        x1=max(display_data['Date']),
-        y1=level[i],
-        line=dict(color='blue', width=1, dash='dash')
+        x0=display_data['Date'].iloc[0],
+        y0=resistance[i],
+        x1=display_data['Date'].iloc[-1],
+        y1=resistance[i],
+        line=dict(color='red', width=1, dash='dot')
     )
 
 # Removing duplicates values
