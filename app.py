@@ -315,8 +315,8 @@ for i in range(len(resistance)):
     )
 
 # Removing duplicates values
-#support = list(set(support))
-#resistance = list(set(resistance))
+support = list(set(support))
+resistance = list(set(resistance))
 
 
 fig3.update_xaxes(griddash='dash', gridwidth=1, gridcolor='#535566')
