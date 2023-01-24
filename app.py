@@ -304,27 +304,25 @@ threshold = 0.05
 
 # Add support levels to the figure
 for i in range(len(support)):
-    if i == 0 or support[i] - support[i-1] > threshold:
-        fig3.add_shape(
-            type='line',
-            x0=display_data['Date'].iloc[0],
-            y0=support[i],
-            x1=display_data['Date'].iloc[-1],
-            y1=support[i],
-            line=dict(color='green', width=2, dash='dash')
-        )
+    fig3.add_shape(
+        type='line',
+        x0=display_data['Date'].iloc[0],
+        y0=support[i],
+        x1=display_data['Date'].iloc[-1],
+        y1=support[i],
+        line=dict(color='green', width=1, dash='dot')
+    )
 
 # Add resistance levels to the figure
 for i in range(len(resistance)):
-    if i == 0 or resistance[i] - resistance[i-1] > threshold:
-        fig3.add_shape(
-            type='line',
-            x0=display_data['Date'].iloc[0],
-            y0=resistance[i],
-            x1=display_data['Date'].iloc[-1],
-            y1=resistance[i],
-            line=dict(color='red', width=2, dash='dash')
-        )
+    fig3.add_shape(
+        type='line',
+        x0=display_data['Date'].iloc[0],
+        y0=resistance[i],
+        x1=display_data['Date'].iloc[-1],
+        y1=resistance[i],
+        line=dict(color='red', width=1, dash='dot')
+    )
 
 # Removing duplicates values
 support = list(set(support))
