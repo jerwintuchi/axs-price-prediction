@@ -243,6 +243,19 @@ fig3 = go.Figure()
 fig3.add_trace(go.Candlestick(x=display_data['Date'], open=display_data['Open'], high=display_data['High'], low=display_data['Low'], close=display_data['Close']))
 
 
+fig3.add_shape(editable=True,
+              x0=-1, x1=0, y0=2, y1=3,
+              xref='x', yref='y')
+# define dragmode and add modebar buttons
+fig3.update_layout(dragmode='drawrect')
+fig3.show(config={'modeBarButtonsToAdd':['drawline',
+                                        'drawopenpath',
+                                        'drawclosedpath',
+                                        'drawcircle',
+                                        'drawrect',
+                                        'eraseshape'
+                                       ]})
+
 # Create a threshold variable to set the minimum distance between lines
 threshold = 0.05
 
@@ -285,33 +298,11 @@ for i in range(len(resistance)):
 support = list(set(support))
 resistance = list(set(resistance))
 
-#Edit BUTTONS
-fig3.show(config={'modeBarButtonsToAdd': ['drawline', 'drawopenpath', 'drawclosedpath', 'drawcircle', 'drawrect', 'eraseshape']})
-fig3.update_layout(
-    updatemenus=[
-        dict(
-            buttons=list([
-                dict(
-                    args=[None, {"modeBarButtonsToAdd": ["drawline", "drawopenpath", "drawclosedpath", "drawcircle", "drawrect", "eraseshape"]}],
-                    label="Drawing",
-                    method="update"
-                ),
-            ]),
-            type="buttons",
-            showactive=True,
-            x=0.1,
-            xanchor="left",
-            y=1.2,
-            yanchor="top"
-        ),
-    ]
-)
-
 fig3.update_xaxes(griddash='dash', gridwidth=1, gridcolor='#535566')
 fig3.update_yaxes(griddash='dash', gridwidth=1, gridcolor='#535566')
 fig3.layout.update(title="Support and Resistance Levels",title_font_size=35,title_x=0.5)
 fig3.update_layout(height=1000)
-st.plotly_chart(fig3.show(config={'modeBarButtonsToAdd': ['drawline', 'drawopenpath', 'drawclosedpath', 'drawcircle', 'drawrect', 'eraseshape']}), True)
+st.plotly_chart(fig3, True)
 
 # fig2.add_trace(go.Scatter(x=display_data_w.Date, y=display_data_w.Close, name="Price"))
 # fig2.layout.update(title="AXS-USD (1d Intervals)")
