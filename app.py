@@ -251,10 +251,6 @@ def plot_sr(levels,display_data):
   plot_sr(levels,display_data)
 
 """
-# Initialize empty lists for support and resistance levels
-support = []
-resistance = []
-
 
 def supportlvl(display_data,i):
     #if the previous 2 candles(1st and 2nd candle) is less than the 3rd candle (df['Low'][i]) and the succeeding 2 candles is greater than 3rd candle (df['Low'][i])
@@ -294,7 +290,7 @@ fig3.add_trace(go.Candlestick(x=display_data['Date'], open=display_data['Open'],
 
 
 # Create a threshold variable to set the minimum distance between lines
-threshold = 0.05
+threshold = 3
 
 # Add support levels to the figure
 for i in range(len(support)):
