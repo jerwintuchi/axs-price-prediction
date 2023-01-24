@@ -313,6 +313,7 @@ for i in range(len(support)):
             y0=support[i],
             x1=display_data['Date'].iloc[-1],
             y1=support[i],
+            name='Support',
             line=dict(color='green', width=2, dash='dash')
         )
 
@@ -325,6 +326,7 @@ for i in range(len(resistance)):
             y0=resistance[i],
             x1=display_data['Date'].iloc[-1],
             y1=resistance[i],
+            name='Resistance',
             line=dict(color='red', width=2, dash='dash')
         )
 
