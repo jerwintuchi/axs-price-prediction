@@ -199,7 +199,7 @@ fig.add_trace(go.Scatter(x=display_data.Date,
                         name='5d MA'))
 fig2 = go.Figure() #RSI Chart
 fig2.add_trace(go.Scatter(x=display_data.Date, y=display_data.ksi, name="RSI", line=dict(color="#0095e8", width=3)))
-fig2.layout.update(title="RSI")
+fig2.layout.update(title="RSI",title_font_size=35,title_x=0.5)
 fig2.update_xaxes(griddash='dash', gridwidth=0, gridcolor='#535566')
 fig2.update_yaxes(griddash='dash', gridwidth=0, gridcolor='#535566')
 st.plotly_chart(fig2, True)
@@ -288,7 +288,7 @@ resistance = list(set(resistance))
 
 fig3.update_xaxes(griddash='dash', gridwidth=1, gridcolor='#535566')
 fig3.update_yaxes(griddash='dash', gridwidth=1, gridcolor='#535566')
-fig3.layout.update(title="Support and Resistance Levels",title_font_size=20)
+fig3.layout.update(title="Support and Resistance Levels",title_font_size=35,title_x=0.5)
 fig3.update_layout(height=1000)
 st.plotly_chart(fig3, True)
 
