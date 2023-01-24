@@ -294,8 +294,8 @@ threshold = 0.05
 
 # Add support levels to the figure
 for i in range(len(support)):
-    x0 = pd.to_datetime(display_data.loc[display_data['Low'] == support[i]].index[0])
-    x1 = pd.to_datetime(display_data.loc[display_data['Low'] == support[i]].index[-1])
+    x0 = display_data.loc[display_data['Low'] == support[i]]['Date'].iloc[0]
+    x1 = display_data.loc[display_data['Low'] == support[i]]['Date'].iloc[-1]
     fig3.add_shape(
         type='line',
         x0=x0,
@@ -307,8 +307,8 @@ for i in range(len(support)):
 
 # Add resistance levels to the figure
 for i in range(len(resistance)):
-    x0 = pd.to_datetime(display_data.loc[display_data['High'] == resistance[i]].index[0])
-    x1 = pd.to_datetime(display_data.loc[display_data['High'] == resistance[i]].index[-1])
+    x0 = display_data.loc[display_data['High'] == resistance[i]]['Date'].iloc[0]
+    x1 = display_data.loc[display_data['High'] == resistance[i]]['Date'].iloc[-1]
     fig3.add_shape(
     type='line',
     x0=x0,
