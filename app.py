@@ -295,30 +295,28 @@ fig3.add_trace(go.Candlestick(x=display_data['Date'], open=display_data['Open'],
 threshold = 0.05
 
 for i in range(len(support)):
-    start_index = display_data.loc[display_data['Low'] == support[i]].index[0]
-    end_index = start_index + display_data.loc[display_data['Low'] == support[i]].shape[0] - 1
-    x0 = display_data['Date'][start_index]
-    x1 = display_data['Date'][end_index]
+    support_indices = np.where(display_data['Low'] == support[i])[0]
+    start_index = support_indices[0]
+    end_index = support_indices[-1]
     fig3.add_shape(
         type='line',
-        x0=x0,
+        x0=display_data['Date'][start_index],
         y0=support[i],
-        x1=x1,
+        x1=display_data['Date'][end_index],
         y1=support[i],
         line=dict(color='red', width=1, dash='dot')
     )
 
 # Add resistance levels to the figure
 for i in range(len(resistance)):
-    start_index = display_data.loc[display_data['High'] == resistance[i]].index[0]
-    end_index = start_index + display_data.loc[display_data['High'] == resistance[i]].shape[0] - 1
-    x0 = display_data['Date'][start_index]
-    x1 = display_data['Date'][end_index]
+    resistance_indices = np.where(display_data['Low'] == support[i])[0]
+    start_index = resistance_indices_indices[0]
+    end_index = resistance_indices_indices[-1]
     fig3.add_shape(
         type='line',
-        x0=x0,
+        x0=display_data['Date'][start_index],
         y0=resistance[i],
-        x1=x1,
+        x1=display_data['Date'][end_index],
         y1=resistance[i],
         line=dict(color='red', width=1, dash='dot')
     
