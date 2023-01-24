@@ -286,53 +286,12 @@ for i in range(len(resistance)):
 support = list(set(support))
 resistance = list(set(resistance))
 
+
+
 fig3.update_xaxes(griddash='dash', gridwidth=1, gridcolor='#535566')
 fig3.update_yaxes(griddash='dash', gridwidth=1, gridcolor='#535566')
 fig3.layout.update(title="Support and Resistance Levels",title_font_size=35,title_x=0.5)
 fig3.update_layout(height=1000)
-
-# Add drawline button to the layout
-fig3.update_layout(
-    updatemenus=[
-        dict(
-            buttons=list([
-                dict(
-                    args=[None, {"dragmode": "drawline"}],
-                    label="Draw Line",
-                    method="relayout"
-                ),
-            ]),
-            type="buttons",
-            showactive=True,
-            x=0.1,
-            xanchor="left",
-            y=1.2,
-            yanchor="top"
-        ),
-    ]
-)
-
-# Add drawrect button to the layout
-fig3.update_layout(
-    updatemenus=[
-        dict(
-            buttons=list([
-                dict(
-                    args=[None, {"dragmode": "drawrect"}],
-                    label="Draw Rectangle",
-                    method="relayout"
-                ),
-            ]),
-            type="buttons",
-            showactive=True,
-            x=0.2,
-            xanchor="left",
-            y=1.2,
-            yanchor="top"
-        ),
-    ]
-)
-
 fig3.show(config={'modeBarButtonsToAdd': ['drawline', 'drawopenpath', 'drawclosedpath', 'drawcircle', 'drawrect', 'eraseshape']})
 st.plotly_chart(fig3, True)
 
