@@ -264,8 +264,8 @@ def resistancelvl(display_data,i):
   return resistance
 
 # Initialize empty lists for support and resistance levels
-support = []
-resistance = []
+#support = []
+#resistance = []
 """"
 # Iterate through the dataframe
 for i in range(2, len(display_data)-2):
