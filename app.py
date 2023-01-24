@@ -275,12 +275,18 @@ for i in range(2, len(display_data)-2):
         resistance.append(display_data['High'][i])
 
 """
+#initializing empty list for annotation
+annotations = []
 
-#Annotation for support and resistance when hovered by mouse
-x_mid = (np.datetime64(display_data['Date'].iloc[0]) + np.datetime64(display_data['Date'].iloc[-1]))/2
-y_mid = resistance[i]
-annotations=[dict(x=x_mid, y=y_mid, text='Resistance Line', showarrow=False, hovertext='Resistance Line')]
+for i in range(len(resistance)):
+    if i == 0 or resistance[i] - resistance[i-1] > threshold:
+        x_mid = (display_data['Date'].iloc[0] + display_data['Date'].iloc[-1])/2
+        y_mid = resistance[i]
+        annotations.append(dict(x=x_mid, y=y_mid, xref='x', yref='y', text='Resistance Level', showarrow=False))
+
 layout = go.Layout(annotations=annotations)
+
+fig3 = go.Figure(data=data, layout=layout)
 
 # Create a Plotly figure
 fig3 = go.Figure(data=data, layout=layout)
