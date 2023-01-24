@@ -252,6 +252,8 @@ def plot_sr(levels,display_data):
 
 """
 
+255-327
+
 def supportlvl(display_data,i):
     #if the previous 2 candles(1st and 2nd candle) is less than the 3rd candle (df['Low'][i]) and the succeeding 2 candles is greater than 3rd candle (df['Low'][i])
     #then it is the supportlvl
@@ -294,28 +296,26 @@ threshold = 0.05
 
 # Add support levels to the figure
 for i in range(len(support)):
-    x0 = display_data.loc[display_data['Low'] == support[i]]['Date'].iloc[0]
-    x1 = display_data.loc[display_data['Low'] == support[i]]['Date'].iloc[-1]
+    index = display_data.loc[display_data['Low']==support[i]].index[0]
     fig3.add_shape(
         type='line',
-        x0=display_data['Date'][x0],
+        x0=display_data['Date'][index],
         y0=support[i],
-        x1=x1,
+        x1=display_data['Date'].iloc[-1],
         y1=support[i],
         line=dict(color='green', width=1, dash='dot')
     )
 
 # Add resistance levels to the figure
 for i in range(len(resistance)):
-    x0 = display_data.loc[display_data['High'] == resistance[i]]['Date'].iloc[0]
-    x1 = display_data.loc[display_data['High'] == resistance[i]]['Date'].iloc[-1]
+    index = display_data.loc[display_data['High']==resistance[i]].index[0]
     fig3.add_shape(
-    type='line',
-    x0=display_data['Date'][x0],
-    y0=resistance[i],
-    x1=x1,
-    y1=resistance[i],
-    line=dict(color='red', width=1, dash='dot')
+        type='line',
+        x0=display_data['Date'][index],
+        y0=resistance[i],
+        x1=display_data['Date'].iloc[-1],
+        y1=resistance[i],
+        line=dict(color='red', width=1, dash='dot')
     )
 
 # Removing duplicates values
