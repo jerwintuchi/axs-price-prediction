@@ -293,30 +293,32 @@ fig3.add_trace(go.Candlestick(x=display_data['Date'], open=display_data['Open'],
 threshold = 0.05
 
 for i in range(len(support)):
-    index = display_data.loc[display_data['Low']==support[i]].index[0]
-    next_index = display_data.loc[display_data['Low']==support[i]].index[1]
-    x1 = display_data['Date'][next_index]
+    start_index = display_data.loc[display_data['High'] == support[i]].index[0]
+    end_index = start_index + display_data.loc[display_data['High'] == support[i]].shape[0] - 1
+    x0 = display_data['Date'][start_index]
+    x1 = display_data['Date'][end_index]
     fig3.add_shape(
         type='line',
-        x0=display_data['Date'][index],
+        x0=x0,
         y0=support[i],
         x1=x1,
         y1=support[i],
-        line=dict(color='green', width=1, dash='dot')
+        line=dict(color='red', width=1, dash='dot')
     )
 
 # Add resistance levels to the figure
 for i in range(len(resistance)):
-    index = display_data.loc[display_data['Low']==resistance[i]].index[0]
-    next_index = display_data.loc[display_data['Low']==resistance[i]].index[1]
-    x1 = display_data['Date'][next_index]
+    start_index = display_data.loc[display_data['High'] == resistance[i]].index[0]
+    end_index = start_index + display_data.loc[display_data['High'] == resistance[i]].shape[0] - 1
+    x0 = display_data['Date'][start_index]
+    x1 = display_data['Date'][end_index]
     fig3.add_shape(
         type='line',
-        x0=display_data['Date'][index],
+        x0=x0,
         y0=resistance[i],
         x1=x1,
         y1=resistance[i],
-        line=dict(color='green', width=1, dash='dot')
+        line=dict(color='red', width=1, dash='dot')
     )
 
 # Removing duplicates values
