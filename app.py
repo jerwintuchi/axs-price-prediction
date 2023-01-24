@@ -311,7 +311,7 @@ for i in range(len(support)):
     )
 # Add resistance levels to the figure
 for i in range(len(resistance)):
-    index = display_data.loc[display_data['High']==resistance[i]].index[0]
+    indexr = display_data.loc[display_data['High']==resistance[i]].index[0]
     try:
         next_resistance = resistance[i+1]
         next_resistance_index = display_data.loc[display_data['High']==next_resistance].index[0]
@@ -320,7 +320,7 @@ for i in range(len(resistance)):
         x1 = display_data['Date'].iloc[-1]
     fig3.add_shape(
         type='line',
-        x0=display_data['Date'][index],
+        x0=display_data['Date'][indexr],
         y0=resistance[i],
         x1=x1,
         y1=resistance[i],
