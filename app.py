@@ -263,6 +263,7 @@ def resistancelvl(display_data,i):
   resistance = display_data['High'][i] > display_data['High'][i-1]  and display_data['High'][i] > display_data['High'][i+1] and display_data['High'][i+1] > display_data['High'][i+2] and display_data['High'][i-1] > display_data['High'][i-2]
   return resistance
 
+
 # Initialize empty lists for support and resistance levels
 support = []
 resistance = []
@@ -308,6 +309,8 @@ for i in range(len(support)):
 
 # Add resistance levels to the figure
 for i in range(len(resistance)):
+    print(display_data.loc[display_data['Low']==support[i]].index[0])
+    print(display_data.loc[display_data['High']==resistance[i]].index[0])
     start_index = display_data.loc[display_data['High'] == resistance[i]].index[0]
     end_index = start_index + display_data.loc[display_data['High'] == resistance[i]].shape[0] - 1
     x0 = display_data['Date'][start_index]
@@ -319,6 +322,7 @@ for i in range(len(resistance)):
         x1=x1,
         y1=resistance[i],
         line=dict(color='red', width=1, dash='dot')
+    
     )
 
 # Removing duplicates values
