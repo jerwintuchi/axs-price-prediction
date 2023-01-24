@@ -285,10 +285,7 @@ fig3.add_trace(go.Candlestick(x=display_data['Date'], open=display_data['Open'],
 
 def isFar(value, levels, display_data):
     ave = np.mean(display_data['High'] - display_data['Low'])
-    for _,level in levels:
-        if value > level - ave and value < level + ave:
-            return False
-    return True
+    return np.sum([abs(value-level)<ave for _,level in levels])==0
 
 levels = []
 
