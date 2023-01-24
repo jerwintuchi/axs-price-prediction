@@ -295,7 +295,6 @@ threshold = 0.05
 # Add support levels to the figure
 for i in range(len(support)):
     index = display_data.loc[display_data['Low']==support[i]].index[0]
-    x1 = display_data['Date'][index + display_data.loc[display_data['Low']==support[i]].shape[0] + 1] # end of the support lvl
     fig3.add_shape(
         type='line',
         x0=display_data['Date'][index],
@@ -308,7 +307,6 @@ for i in range(len(support)):
 # Add resistance levels to the figure
 for i in range(len(resistance)):
     index = display_data.loc[display_data['High']==resistance[i]].index[0]
-    x1 = display_data['Date'][index + display_data.loc[display_data['High']==resistance[i]].shape[0] + 1]# end of the resistance lvl
     fig3.add_shape(
         type='line',
         x0=display_data['Date'][index],
@@ -321,6 +319,8 @@ for i in range(len(resistance)):
 # Removing duplicates values
 support = list(set(support))
 resistance = list(set(resistance))
+fig3.add_trace(go.Scatter(x=display_data.loc[display_data['Low'].isin(support), 'Date'], y=support, mode='lines', name='Support', line=dict(color='green', width=1, dash='dot')))
+fig3.add_trace(go.Scatter(x=display_data.loc[display_data['High'].isin(resistance), 'Date'], y=resistance, mode='lines', name='Resistance', line=dict(color='red', width=1, dash='dot')))
 
 
 fig3.update_xaxes(griddash='dash', gridwidth=1, gridcolor='#535566')
