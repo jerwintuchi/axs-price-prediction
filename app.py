@@ -286,18 +286,6 @@ support = list(set(support))
 resistance = list(set(resistance))
 
 # DRAW REC
-fig3.add_shape(line_color='yellow',
-              fillcolor='orange',
-              opacity=0.4,
-              editable=True,
-              x0=0, x1=1, y0=2, y1=3,
-              xref='x', yref='y'
-)
-fig3.update_layout(dragmode='drawrect',
-                  # style of new shapes
-                  newshape=dict(line_color='yellow',
-                                fillcolor='turquoise',
-                                opacity=0.5))
 fig3.show(config={'modeBarButtonsToAdd':['drawline',
                                         'drawopenpath',
                                         'drawclosedpath',
