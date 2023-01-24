@@ -243,18 +243,6 @@ fig3 = go.Figure()
 fig3.add_trace(go.Candlestick(x=display_data['Date'], open=display_data['Open'], high=display_data['High'], low=display_data['Low'], close=display_data['Close']))
 
 
-fig3.add_shape(editable=True,
-              x0=-1, x1=0, y0=2, y1=3,
-              xref='x', yref='y')
-# define dragmode and add modebar buttons
-fig3.update_layout(dragmode='drawrect')
-fig3.show(config={'modeBarButtonsToAdd':['drawline',
-                                        'drawopenpath',
-                                        'drawclosedpath',
-                                        'drawcircle',
-                                        'drawrect',
-                                        'eraseshape'
-                                       ]})
 
 # Create a threshold variable to set the minimum distance between lines
 threshold = 0.05
