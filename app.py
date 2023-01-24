@@ -292,10 +292,10 @@ fig3.add_trace(go.Candlestick(x=display_data['Date'], open=display_data['Open'],
 # Create a threshold variable to set the minimum distance between lines
 threshold = 0.05
 # Group the support levels that are close to each other
-support_groups = support.groupby(pd.cut(support, np.arange(min(support), max(support) + threshold, threshold)))
+support_np = np.array(support)
 
 # Take the mean of each group to get a single level that represents the group
-filtered_support = support_groups.mean()
+filtered_support, _ = np.histogram(support_np, bins=np.arange(min(support), max(support) + threshold, threshold))
 
 # Group the resistance levels that are close to each other
 resistance_groups = resistance.groupby(pd.cut(resistance, np.arange(min(resistance), max(resistance) + threshold, threshold)))
