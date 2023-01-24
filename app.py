@@ -298,7 +298,7 @@ for i in range(len(support)):
     x1 = display_data.loc[display_data['Low'] == support[i]]['Date'].iloc[-1]
     fig3.add_shape(
         type='line',
-        x0=x0,
+        x0=display_data['Date'][x0],
         y0=support[i],
         x1=x1,
         y1=support[i],
@@ -311,7 +311,7 @@ for i in range(len(resistance)):
     x1 = display_data.loc[display_data['High'] == resistance[i]]['Date'].iloc[-1]
     fig3.add_shape(
     type='line',
-    x0=x0,
+    x0=display_data['Date'][x0],
     y0=resistance[i],
     x1=x1,
     y1=resistance[i],
