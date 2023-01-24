@@ -294,32 +294,34 @@ fig3.add_trace(go.Candlestick(x=display_data['Date'], open=display_data['Open'],
 # Create a threshold variable to set the minimum distance between lines
 threshold = 0.05
 
+# Add support levels to the figure
 for i in range(len(support)):
-    support_indices = np.where(display_data['Low'] == support[i])[0]
-    start_index = support_indices[0]
-    end_index = support_indices[-1]
+    start_index = display_data.loc[display_data['Low'] == resistance[i]].index[0]
+    end_index = start_index + display_data.loc[display_data['Low'] == support[i]].shape[0]
+    x0 = display_data['Date'][start_index]
+    x1 = display_data['Date'][end_index-1]
     fig3.add_shape(
         type='line',
-        x0=display_data['Date'][start_index],
+        x0=x0,
         y0=support[i],
-        x1=display_data['Date'][end_index],
+        x1=x1,
         y1=support[i],
         line=dict(color='red', width=1, dash='dot')
     )
 
 # Add resistance levels to the figure
 for i in range(len(resistance)):
-    resistance_indices = np.where(display_data['High'] == support[i])[0]
-    start_index = resistance_indices[0]
-    end_index = resistance_indices[-1]
+    start_index = display_data.loc[display_data['High'] == resistance[i]].index[0]
+    end_index = start_index + display_data.loc[display_data['High'] == resistance[i]].shape[0]
+    x0 = display_data['Date'][start_index]
+    x1 = display_data['Date'][end_index-1]
     fig3.add_shape(
         type='line',
-        x0=display_data['Date'][start_index],
+        x0=x0,
         y0=resistance[i],
-        x1=display_data['Date'][end_index],
+        x1=x1,
         y1=resistance[i],
         line=dict(color='red', width=1, dash='dot')
-    
     )
 
 # Removing duplicates values
