@@ -264,8 +264,8 @@ def resistancelvl(display_data,i):
   return resistance
 
 # Initialize empty lists for support and resistance levels
-#support = []
-#resistance = []
+support = []
+resistance = []
 """"
 # Iterate through the dataframe
 for i in range(2, len(display_data)-2):
@@ -275,13 +275,6 @@ for i in range(2, len(display_data)-2):
         resistance.append(display_data['High'][i])
 
 """
-
-
-# Create a Plotly figure
-fig3 = go.Figure()
-# Add a candlestick chart of the data
-fig3.add_trace(go.Candlestick(x=display_data['Date'], open=display_data['Open'], high=display_data['High'], low=display_data['Low'], close=display_data['Close']))
-
 
 def isFar(value, levels, display_data):
     ave = np.mean(display_data['High'] - display_data['Low'])
@@ -298,6 +291,12 @@ for i in range(2, display_data.shape[0] - 2):
         high = display_data['High'][i]
         if isFar(high, levels, display_data):
             resistance.append(high)
+
+# Create a Plotly figure
+fig3 = go.Figure()
+# Add a candlestick chart of the data
+fig3.add_trace(go.Candlestick(x=display_data['Date'], open=display_data['Open'], high=display_data['High'], low=display_data['Low'], close=display_data['Close']))
+
 
 # Create a threshold variable to set the minimum distance between lines
 threshold = 0.05
