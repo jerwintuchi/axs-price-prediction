@@ -294,8 +294,8 @@ threshold = 0.05
 
 # Add support levels to the figure
 for i in range(len(support)):
-    index = display_data.loc[display_data['Low']==support[i]].index[0]
-    x1 = display_data['Date'][index + display_data.loc[display_data['Low']==support[i]].shape[0] - 1]
+    index = display_data.loc[display_data['Low']==support[i]].index[-1] #get the index of the last occurrence of the support level
+    x1 = display_data['Date'][index] #get the date at that index
     fig3.add_shape(
         type='line',
         x0=display_data['Date'][index],
@@ -307,8 +307,8 @@ for i in range(len(support)):
 
 # Add resistance levels to the figure
 for i in range(len(resistance)):
-    index = display_data.loc[display_data['High']==resistance[i]].index[0]
-    x1 = display_data['Date'][index + display_data.loc[display_data['High']==resistance[i]].shape[0] - 1]
+    index = display_data.loc[display_data['High']==resistance[i]].index[-1] #get the index of the last occurrence of the resistance level
+    x1 = display_data['Date'][index] #get the date at that index
     fig3.add_shape(
         type='line',
         x0=display_data['Date'][index],
