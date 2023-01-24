@@ -242,6 +242,16 @@ fig3 = go.Figure()
 # Add a candlestick chart of the data
 fig3.add_trace(go.Candlestick(x=display_data['Date'], open=display_data['Open'], high=display_data['High'], low=display_data['Low'], close=display_data['Close']))
 
+text="Support And Resistance Levels"
+fig.add_annotation(
+            x=0.025,
+            y=0.5,
+            text=text,
+            xref="paper",
+            yref="paper",
+            showarrow=False,
+            font_size=20
+)
 
 # Create a threshold variable to set the minimum distance between lines
 threshold = 0.05
