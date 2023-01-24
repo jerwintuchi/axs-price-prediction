@@ -252,8 +252,6 @@ def plot_sr(levels,display_data):
 
 """
 
-255-327
-
 def supportlvl(display_data,i):
     #if the previous 2 candles(1st and 2nd candle) is less than the 3rd candle (df['Low'][i]) and the succeeding 2 candles is greater than 3rd candle (df['Low'][i])
     #then it is the supportlvl
