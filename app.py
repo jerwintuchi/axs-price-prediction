@@ -276,29 +276,9 @@ for i in range(2, len(display_data)-2):
 
 """
 
-# Create a threshold variable to set the minimum distance between lines
-threshold = 0.05
-
-#initializing empty list for annotation
-annotations = []
-data = [go.Candlestick(x=display_data['Date'], open=display_data['Open'], high=display_data['High'], low=display_data['Low'], close=display_data['Close'])]
-
-for i in range(len(support)):
-    if i == 0 or support[i] - support[i-1] > threshold:
-        x_mid = (display_data['Date'].iloc[0] + display_data['Date'].iloc[-1])/2
-        y_mid = support[i]
-        annotations.append(dict(x=x_mid, y=y_mid, xref='x', yref='y', text='Support Level', showarrow=False))
-
-for i in range(len(resistance)):
-    if i == 0 or resistance[i] - resistance[i-1] > threshold:
-        x_mid = (display_data['Date'].iloc[0] + display_data['Date'].iloc[-1])/2
-        y_mid = resistance[i]
-        annotations.append(dict(x=x_mid, y=y_mid, xref='x', yref='y', text='Resistance Level', showarrow=False))
-
-layout = go.Layout(annotations=annotations) 
 
 # Create a Plotly figure
-fig3 = go.Figure(data=display_data, layout=layout)
+fig3 = go.Figure()
 # Add a candlestick chart of the data
 fig3.add_trace(go.Candlestick(x=display_data['Date'], open=display_data['Open'], high=display_data['High'], low=display_data['Low'], close=display_data['Close']))
 
@@ -318,6 +298,9 @@ for i in range(2, display_data.shape[0] - 2):
         high = display_data['High'][i]
         if isFar(high, levels, display_data):
             resistance.append(high)
+
+# Create a threshold variable to set the minimum distance between lines
+threshold = 0.05
 
 
 # Add support levels to the figure
