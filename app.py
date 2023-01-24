@@ -297,7 +297,7 @@ for i in range(len(support)):
     fig3.add_shape(
         type='line',
         x0=display_data['Date'].iloc[0],
-        y0=support_groups[i],
+        y0=support[i],
         x1=display_data['Date'].iloc[-1],
         y1=support[i],
         line=dict(color='green', width=1, dash='dot')
@@ -308,9 +308,9 @@ for i in range(len(resistance)):
     fig3.add_shape(
         type='line',
         x0=display_data['Date'].iloc[0],
-        y0=resistance_groups[i],
+        y0=resistance[i],
         x1=display_data['Date'].iloc[-1],
-        y1=resistance_groups[i],
+        y1=resistance[i],
         line=dict(color='red', width=1, dash='dot')
     )
 
