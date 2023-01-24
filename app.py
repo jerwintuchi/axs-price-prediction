@@ -281,7 +281,7 @@ threshold = 0.05
 
 #initializing empty list for annotation
 annotations = []
-
+data = [go.Candlestick(x=display_data['Date'], open=display_data['Open'], high=display_data['High'], low=display_data['Low'], close=display_data['Close'])]
 
 for i in range(len(support)):
     if i == 0 or support[i] - support[i-1] > threshold:
