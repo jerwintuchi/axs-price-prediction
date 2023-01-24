@@ -293,8 +293,8 @@ fig3.add_trace(go.Candlestick(x=display_data['Date'], open=display_data['Open'],
 threshold = 0.05
 
 for i in range(len(support)):
-    start_index = display_data.loc[display_data['High'] == support[i]].index[0]
-    end_index = start_index + display_data.loc[display_data['High'] == support[i]].shape[0] - 1
+    start_index = display_data.loc[display_data['Low'] == support[i]].index[0]
+    end_index = start_index + display_data.loc[display_data['Low'] == support[i]].shape[0] - 1
     x0 = display_data['Date'][start_index]
     x1 = display_data['Date'][end_index]
     fig3.add_shape(
