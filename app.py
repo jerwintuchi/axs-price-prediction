@@ -297,10 +297,8 @@ for i in range(len(resistance)):
 
 layout = go.Layout(annotations=annotations) 
 
-fig3 = go.Figure(data=display_data, layout=layout)
-
 # Create a Plotly figure
-fig3 = go.Figure(data=display_data, layout=layout)
+fig3 = go.Figure(data=data, layout=layout)
 # Add a candlestick chart of the data
 fig3.add_trace(go.Candlestick(x=display_data['Date'], open=display_data['Open'], high=display_data['High'], low=display_data['Low'], close=display_data['Close']))
 
