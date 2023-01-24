@@ -292,10 +292,10 @@ fig3.add_trace(go.Candlestick(x=display_data['Date'], open=display_data['Open'],
 # Create a threshold variable to set the minimum distance between lines
 threshold = 0.05
 
-# Add support levels to the figure
 for i in range(len(support)):
-    index = display_data.loc[display_data['Low']==support[i]].index[-1] #get the index of the last occurrence of the support level
-    x1 = display_data['Date'][index] #get the date at that index
+    index = display_data.loc[display_data['Low']==support[i]].index[0]
+    next_index = display_data.loc[display_data['Low']==support[i]].index[1]
+    x1 = display_data['Date'][next_index]
     fig3.add_shape(
         type='line',
         x0=display_data['Date'][index],
@@ -307,15 +307,16 @@ for i in range(len(support)):
 
 # Add resistance levels to the figure
 for i in range(len(resistance)):
-    index = display_data.loc[display_data['High']==resistance[i]].index[-1] #get the index of the last occurrence of the resistance level
-    x1 = display_data['Date'][index] #get the date at that index
+    index = display_data.loc[display_data['Low']==resistance[i]].index[0]
+    next_index = display_data.loc[display_data['Low']==resistance[i]].index[1]
+    x1 = display_data['Date'][next_index]
     fig3.add_shape(
         type='line',
         x0=display_data['Date'][index],
         y0=resistance[i],
         x1=x1,
         y1=resistance[i],
-        line=dict(color='red', width=1, dash='dot')
+        line=dict(color='green', width=1, dash='dot')
     )
 
 # Removing duplicates values
