@@ -266,11 +266,10 @@ def resistancelvl(display_data,i):
     #same logic with supportlvl except that it is reversed
   resistance = display_data['High'][i] > display_data['High'][i-1]  and display_data['High'][i] > display_data['High'][i+1] and display_data['High'][i+1] > display_data['High'][i+2] and display_data['High'][i-1] > display_data['High'][i-2]
   return resistance
-for i in range(len(support)):
-    print(support[i])
-for i in range(len(resistance)):
-    print(resistance[i])
 
+# Initialize empty lists for support and resistance levels
+support = []
+resistance = []
 
 def isFar(value, levels, display_data):
     ave = np.mean(display_data['High'] - display_data['Low'])
@@ -299,28 +298,24 @@ threshold = 0.05
 
 # Add support levels to the figure
 for i in range(len(support)):
-    start_index = display_data.loc[display_data['Low'] == support[i]].index[0]
-    end_index = start_index + display_data.loc[display_data['Low'] == support[i]].shape[0]
+    index = display_data.loc[display_data['Low']==support[i]].index[0]
     fig3.add_shape(
         type='line',
-        x0=display_data['Date'][start_index],
+        x0=display_data['Date'][index],
         y0=support[i],
-        x1=display_data['Date'][end_index],
+        x1=display_data['Date'].iloc[-1],
         y1=support[i],
         line=dict(color='green', width=1, dash='dot')
     )
 
 # Add resistance levels to the figure
 for i in range(len(resistance)):
-    start_index = display_data.loc[display_data['High'] == resistance[i]].index[0]
-    end_index = start_index + display_data.loc[display_data['High'] == resistance[i]].shape[0]
-    x0 = display_data['Date'][start_index]
-    x1 = display_data['Date'][end_index-1]
+    index = display_data.loc[display_data['High']==resistance[i]].index[0]
     fig3.add_shape(
         type='line',
-        x0=x0,
+        x0=display_data['Date'][index],
         y0=resistance[i],
-        x1=x1,
+        x1=display_data['Date'].iloc[-1],
         y1=resistance[i],
         line=dict(color='red', width=1, dash='dot')
     )
