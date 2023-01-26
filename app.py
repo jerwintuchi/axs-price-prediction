@@ -178,7 +178,7 @@ st.title("All Time Chart")
 st.plotly_chart(fig, True)
 
 # Calculate the RSI using the close prices and a lookback period of 6
-display_data["ksi"] = ta.rsi(display_data.Close,length=6)
+display_data["ksi"] = pd.to_numeric(ta.rsi(display_data.Close,length=6))
 display_data["ma"] = display_data.Close.rolling(window=13).mean()
 display_data["ma5"] = display_data.Close.rolling(window=5).mean()
 
@@ -198,6 +198,7 @@ fig.add_trace(go.Scatter(x=display_data.Date,
                         opacity=0.7, 
                         line=dict(color='red', width=2), 
                         name='5d MA'))
+
 #st.write(display_data.isna().sum())
 st.write(type(display_data["ksi"]))
                         
