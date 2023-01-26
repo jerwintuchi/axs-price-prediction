@@ -199,7 +199,10 @@ fig.add_trace(go.Scatter(x=display_data.Date,
                         name='5d MA'))
 
 fig2 = go.Figure() #RSI Chart
-fig2.add_trace(go.Scatter(x=display_data.Date, y=display_data.ksi, name="RSI", line=dict(color="#0095e8", width=3)))
+# array with color values
+color_array = np.where(display_data.rsi > 70, 'red', np.where(display_data.rsi < 30, 'green', '#0095e8'))
+
+fig2.add_trace(go.Scatter(x=display_data.Date, y=display_data.rsi, name="RSI", line=dict(color=color_array, width=3)))
 fig2.layout.update(title="RSI",title_font_size=35,title_x=0.5)
 fig2.update_xaxes(griddash='dash', gridwidth=0, gridcolor='#535566', type='date')
 fig2.update_yaxes(griddash='dash', gridwidth=0, gridcolor='#535566')
