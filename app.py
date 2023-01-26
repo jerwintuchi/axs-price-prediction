@@ -198,9 +198,9 @@ fig.add_trace(go.Scatter(x=display_data.Date,
                         opacity=0.7, 
                         line=dict(color='red', width=2), 
                         name='5d MA'))
-ksi = pd.to_numeric(display_data["ksi"],downcast="float")
+                    
 #st.write(display_data.isna().sum())
-st.write(type(ksi))
+st.write(type(display_data["ksi"]))
                         
 fig2 = go.Figure() #RSI Chart
 # Create an empty list to store the color values
@@ -342,7 +342,7 @@ if st.checkbox('Support and Resistance Chart'): # SHOW SUPPORT AND RESISTANCE BU
     fig3.update_xaxes(griddash='dash', gridwidth=1, gridcolor='#535566')
     fig3.update_yaxes(griddash='dash', gridwidth=1, gridcolor='#535566')
     fig3.layout.update(title="Support and Resistance Levels",title_font_size=35,title_x=0.5)
-    fig3.update_layout(height=1000)
+    fig3.update_layout(height=1500)
 
     fig3.update_layout(
         dragmode="drawopenpath",
