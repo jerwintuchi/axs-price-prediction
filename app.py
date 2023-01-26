@@ -182,8 +182,6 @@ display_data["ksi"] = ta.rsi(display_data.Close,length=6)
 display_data["ma"] = display_data.Close.rolling(window=13).mean()
 display_data["ma5"] = display_data.Close.rolling(window=5).mean()
 
-
-
 fig = go.Figure()
 fig.add_trace(go.Scatter(x=display_data.Date, y=display_data.Close, name="Forecast", line=dict(color="#0095e8", width=7)))
 fig.update_xaxes(griddash='dash', gridwidth=1, gridcolor='#535566')
@@ -200,17 +198,15 @@ fig.add_trace(go.Scatter(x=display_data.Date,
                         opacity=0.7, 
                         line=dict(color='red', width=2), 
                         name='5d MA'))
-s =  display_data["ksi"]                     
-ksi = pd.tonumeric(s)
 #st.write(display_data.isna().sum())
-st.write(type(display_data))
+st.write(type(display_data["ksi"]))
                         
 fig2 = go.Figure() #RSI Chart
 # Create an empty list to store the color values
 color_list = []
 
 # Iterate through the RSI values
-for rsi_val in ksi.ksi:
+for rsi_val in display_data.ksi:
     # Check if the RSI value is above 70
     if rsi_val > 70:
         color_list.append('red')
@@ -221,7 +217,7 @@ for rsi_val in ksi.ksi:
     else:
         color_list.append('#0095e8')
 
-fig2.add_trace(go.Scattergl(x=ksi.Date, y=ksi.ksi, name="RSI", mode='lines', line=dict(width=3), marker=dict(color=color_list)))
+fig2.add_trace(go.Scattergl(x=display_data.Date, y=display_data.ksi, name="RSI", mode='lines', line=dict(width=3), marker=dict(color=color_list)))
 fig2.update_layout(title="RSI",title_font_size=35,title_x=0.5)
 fig2.update_xaxes(griddash='dash', gridwidth=0, gridcolor='#535566', type='date')
 fig2.update_yaxes(griddash='dash', gridwidth=0, gridcolor='#535566')
