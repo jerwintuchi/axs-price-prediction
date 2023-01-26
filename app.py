@@ -200,8 +200,8 @@ fig.add_trace(go.Scatter(x=display_data.Date,
                         opacity=0.7, 
                         line=dict(color='red', width=2), 
                         name='5d MA'))
-                        
-ksi = pd.tonumeric(display_data["ksi"])
+s =  display_data["ksi"]                     
+ksi = pd.tonumeric(s)
 #st.write(display_data.isna().sum())
 st.write(type(display_data))
                         
