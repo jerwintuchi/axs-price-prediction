@@ -199,10 +199,22 @@ fig.add_trace(go.Scatter(x=display_data.Date,
                         name='5d MA'))
 
 fig2 = go.Figure() #RSI Chart
-# array with color values
-color_array = np.where(display_data.rsi > 70, 'red', np.where(display_data.rsi < 30, 'green', '#0095e8'))
+# Create an empty list to store the color values
+color_list = []
 
-fig2.add_trace(go.Scatter(x=display_data.Date, y=display_data.rsi, name="RSI", line=dict(color=color_array, width=3)))
+# Iterate through the RSI values
+for rsi_val in display_data.rsi:
+    # Check if the RSI value is above 70
+    if rsi_val > 70:
+        color_list.append('red')
+    # Check if the RSI value is below 30
+    elif rsi_val < 30:
+        color_list.append('green')
+    # Otherwise, set the color to blue
+    else:
+        color_list.append('#0095e8')
+
+fig2.add_trace(go.Scatter(x=display_data.Date, y=display_data.rsi, name="RSI", line=dict(color=color_list, width=3)))
 fig2.layout.update(title="RSI",title_font_size=35,title_x=0.5)
 fig2.update_xaxes(griddash='dash', gridwidth=0, gridcolor='#535566', type='date')
 fig2.update_yaxes(griddash='dash', gridwidth=0, gridcolor='#535566')
