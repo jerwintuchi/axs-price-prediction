@@ -198,11 +198,7 @@ fig.add_trace(go.Scatter(x=display_data.Date,
                         opacity=0.7, 
                         line=dict(color='red', width=2), 
                         name='5d MA'))
-st.write(display_data.isna().sum())
-
-if not all(np.isfinite(display_data.ksi)) or display_data.ksi.dtype != "float64":
-    st.error("The RSI data is not valid.")
-    
+#st.write(display_data.isna().sum())
                         
 fig2 = go.Figure() #RSI Chart
 # Create an empty list to store the color values
