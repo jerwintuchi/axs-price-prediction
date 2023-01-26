@@ -198,6 +198,9 @@ fig.add_trace(go.Scatter(x=display_data.Date,
                         line=dict(color='red', width=2), 
                         name='5d MA'))
                         
+if not all(np.isfinite(display_data.ksi)) or display_data.ksi.dtype != "float64":
+    st.error("The RSI data is not valid.")
+                        
 fig2 = go.Figure() #RSI Chart
 # Create an empty list to store the color values
 color_list = []
