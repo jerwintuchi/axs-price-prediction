@@ -177,16 +177,6 @@ fig.update_layout(height=800)
 st.title("All Time Chart")
 st.plotly_chart(fig, True)
 
-# Check if the close prices data is not empty
-if display_data.Close.empty:
-    st.error("Close prices data is missing.")
-
-
-# Check if the close prices data contains numerical values
-if not display_data.Close.apply(lambda x: isinstance(x, (int, float))).all():
-    st.error("Close prices data contains non-numerical values.")
-
-
 # Calculate the RSI using the close prices and a lookback period of 6
 display_data["ksi"] = ta.rsi(display_data.Close,length=6)
 display_data["ma"] = display_data.Close.rolling(window=13).mean()
@@ -208,9 +198,11 @@ fig.add_trace(go.Scatter(x=display_data.Date,
                         opacity=0.7, 
                         line=dict(color='red', width=2), 
                         name='5d MA'))
-                        
+print(display_data.isna().sum()) 
+
 if not all(np.isfinite(display_data.ksi)) or display_data.ksi.dtype != "float64":
     st.error("The RSI data is not valid.")
+    
                         
 fig2 = go.Figure() #RSI Chart
 # Create an empty list to store the color values
