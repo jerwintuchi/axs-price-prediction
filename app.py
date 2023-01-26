@@ -206,9 +206,9 @@ fig2.layout.shapes = [
     # 70% line
     go.layout.Shape(
         type="line",
-        x0=pd.to_datetime(fig2.data[0].x[0]).value,
+        x0=fig2.data[0].x[0],
         y0=70,
-        x1=pd.to_datetime(fig2.data[0].x[-1]).value,
+        x1=fig2.data[0].x[-1],
         y1=70,
         line=dict(
             color="#0095e8",
@@ -219,9 +219,9 @@ fig2.layout.shapes = [
     # 30% line
     go.layout.Shape(
         type="line",
-        x0=pd.to_datetime(fig2.data[0].x[0]).value,
+        x0=fig2.data[0].x[0],
         y0=30,
-        x1=pd.to_datetime(fig2.data[0].x[-1]).value,
+        x1=fig2.data[0].x[-1],
         y1=30,
         line=dict(
             color="#0095e8",
