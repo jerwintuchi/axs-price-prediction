@@ -1,4 +1,4 @@
-streamlit==1.13.0
+streamlit==1.14.0
 feedparser==6.0.10
 Beautifulsoup4 
 Dateparser == 0.7.6
