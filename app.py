@@ -269,7 +269,7 @@ if st.checkbox('Show dataframe'):
         indexr = display_data.loc[display_data['High']==resistance[i]].index[0]
         try:
          next_resistance = resistance[i+1]
-            next_resistance_index = display_data.loc[display_data['High']==next_resistance].index[0]
+         next_resistance_index = display_data.loc[display_data['High']==next_resistance].index[0]
          x1 = display_data['Date'][next_resistance_index]
         except:
             x1 = display_data['Date'].iloc[-1]
