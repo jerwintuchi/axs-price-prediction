@@ -200,8 +200,8 @@ fig.add_trace(go.Scatter(x=display_data.Date,
 
 fig2 = go.Figure() #RSI Chart
 fig2.layout.update(title="RSI",title_font_size=35,title_x=0.5)
-fig2.update_xaxes(griddash='dash', gridwidth=0, gridcolor='#535566')
-fig2.update_yaxes(griddash='dash', gridwidth=0, gridcolor='#535566')
+fig2.update_xaxes(griddash='dash', gridwidth=0, gridcolor='#535566', type='date')
+fig2.update_yaxes(griddash='dash', gridwidth=0, gridcolor='#535566', type='date')
 fig2.layout.shapes = [
     # 70% line
     go.layout.Shape(
