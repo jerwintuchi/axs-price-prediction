@@ -236,9 +236,9 @@ for i in range(2, display_data.shape[0] - 2):
         high = display_data['High'][i]
         if isFar(high, levels, display_data):
             resistance.append(high)
-
+if st.checkbox('Show dataframe'):
 # Create a Plotly figure
-fig3 = go.Figure()
+    fig3 = go.Figure()
 # Add a candlestick chart of the data
 fig3.add_trace(go.Candlestick(x=display_data['Date'], open=display_data['Open'], high=display_data['High'], low=display_data['Low'], close=display_data['Close']))
 
