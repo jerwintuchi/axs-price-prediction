@@ -214,7 +214,7 @@ fig2.layout.shapes = [
         y1=70,
         line=dict(
             color="red", #BUY
-            width=3,
+            width=2,
             dash="dash"
         )
     ),
@@ -227,7 +227,7 @@ fig2.layout.shapes = [
         y1=30,
         line=dict(
             color="green", #SELL
-            width=3,
+            width=2,
             dash="dash"
         )
     )
