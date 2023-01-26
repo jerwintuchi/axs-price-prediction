@@ -237,7 +237,7 @@ for i in range(2, display_data.shape[0] - 2):
         if isFar(high, levels, display_data):
             resistance.append(high)
 
-col1, col2, col3 = st.beta_columns(3)
+col1, col2, col3 = st.columns(3)
 with st.checkbox('Support and Resistance Chart'):
     col4, col5, col6 = st.beta_columns([3,2,1])
     # FOR CENTERING THE CHECKBOX
