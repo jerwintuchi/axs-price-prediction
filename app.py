@@ -216,7 +216,6 @@ for rsi_val in display_data.ksi:
 
 fig2.add_trace(go.Scatter(x=display_data.Date, y=display_data.ksi, name="RSI", line=dict(color=color_list, width=3)))
 fig2.update_layout(yaxis=dict(gridcolor='#535566', gridwidth=1), xaxis=dict(gridcolor='#535566', gridwidth=1))
-st.plotly_chart(fig2, True)
 
 fig2.layout.shapes = [
     # 70% line
