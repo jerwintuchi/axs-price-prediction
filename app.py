@@ -292,7 +292,28 @@ fig3.update_xaxes(griddash='dash', gridwidth=1, gridcolor='#535566')
 fig3.update_yaxes(griddash='dash', gridwidth=1, gridcolor='#535566')
 fig3.layout.update(title="Support and Resistance Levels",title_font_size=35,title_x=0.5)
 fig3.update_layout(height=1000)
-fig3.show(config={'modeBarButtonsToAdd': ['drawline', 'drawopenpath', 'drawclosedpath', 'drawcircle', 'drawrect', 'eraseshape']})
+
+fig3.update_layout(
+    dragmode="drawopenpath",
+    newshape_line_color="cyan",
+    title_text="You can draw within this chart.",
+)
+config = dict(
+    {
+        "scrollZoom": True,
+        "displayModeBar": True,
+        # 'editable'              : True,
+        "modeBarButtonsToAdd": [
+            "drawline",
+            "drawopenpath",
+            "drawclosedpath",
+            "drawcircle",
+            "drawrect",
+            "eraseshape",
+        ],
+        "toImageButtonOptions": {"format": "svg"},
+    }
+)
 st.plotly_chart(fig3, True)
 
 # fig2.add_trace(go.Scatter(x=display_data_w.Date, y=display_data_w.Close, name="Price"))
