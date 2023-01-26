@@ -177,6 +177,17 @@ fig.update_layout(height=800)
 st.title("All Time Chart")
 st.plotly_chart(fig, True)
 
+# Check if the close prices data is not empty
+if display_data.Close.empty:
+    st.error("Close prices data is missing.")
+
+
+# Check if the close prices data contains numerical values
+if not display_data.Close.apply(lambda x: isinstance(x, (int, float))).all():
+    st.error("Close prices data contains non-numerical values.")
+
+
+# Calculate the RSI using the close prices and a lookback period of 6
 display_data["ksi"] = ta.rsi(display_data.Close,length=6)
 display_data["ma"] = display_data.Close.rolling(window=13).mean()
 display_data["ma5"] = display_data.Close.rolling(window=5).mean()
