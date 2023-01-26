@@ -220,20 +220,8 @@ fig2.add_trace(go.Scattergl(x=display_data.Date, y=display_data.ksi, name="RSI",
 fig2.update_layout(title="RSI",title_font_size=35,title_x=0.5)
 fig2.update_xaxes(griddash='dash', gridwidth=0, gridcolor='#535566', type='date')
 fig2.update_yaxes(griddash='dash', gridwidth=0, gridcolor='#535566')
-fig2.layout.shapes = [    # 70% line    
-    go.layout.Shape(        
-        type="line",        
-        x0=fig2.data[0].x[0],
-        y0=70,
-        x1=fig2.data[0].x[-1],
-        y1=70,
-        line=dict(
-            color="red", #BUY
-            width=2,
-            dash="dash"
-        )
-    ),
-    # 30% line 
+fig2.layout.shapes = [
+    # 70% line
     go.layout.Shape(
         type="line",
         x0=fig2.data[0].x[0],
