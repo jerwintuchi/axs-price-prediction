@@ -199,25 +199,27 @@ fig.add_trace(go.Scatter(x=display_data.Date,
                         name='5d MA'))
 
 fig2 = go.Figure() #RSI Chart
-# Create an empty list to store the color values
-color_list = []
+# Create an empty list to store the marker style and color values
+mode_list = []
 
 # Iterate through the RSI values
 for rsi_val in display_data.rsi:
     # Check if the RSI value is above 70
     if rsi_val > 70:
-        color_list.append('red')
+        mode_list.append('markers+lines')
     # Check if the RSI value is below 30
     elif rsi_val < 30:
-        color_list.append('green')
-    # Otherwise, set the color to blue
+        mode_list.append('markers+lines')
+    # Otherwise, set the marker style and color to default
     else:
-        color_list.append('#0095e8')
+        mode_list.append('lines')
 
-fig2.add_trace(go.Scatter(x=display_data.Date, y=display_data.rsi, name="RSI", line=dict(color=color_list, width=3)))
+fig2.add_trace(go.Scatter(x=display_data.Date, y=display_data.rsi, name="RSI", mode=mode_list, marker=dict(color=['red' if rsi>70 else 'green' if rsi<30 else '#0095e8' for rsi in display_data.rsi]),line=dict(width=3)))
 fig2.layout.update(title="RSI",title_font_size=35,title_x=0.5)
 fig2.update_xaxes(griddash='dash', gridwidth=0, gridcolor='#535566', type='date')
-fig2.update_yaxes(griddash='dash', gridwidth=0, gridcolor='#535566')
+fig2.update_yaxes(griddash='dash'gridwidth=0, gridcolor='#535566')
+
+st.plotly_chart(fig2, True)
 
 fig2.layout.shapes = [
     # 70% line
