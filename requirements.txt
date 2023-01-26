@@ -6,6 +6,6 @@ Feedparser == 6.0.10
 requests
 newspaper3k
 yfinance == 0.1.74
-plotly == 2.14.0
+plotly 
 pandas_ta
 matplotlib
