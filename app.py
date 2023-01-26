@@ -202,13 +202,13 @@ fig2 = go.Figure() #RSI Chart
 fig2.layout.update(title="RSI",title_font_size=35,title_x=0.5)
 fig2.update_xaxes(griddash='dash', gridwidth=0, gridcolor='#535566')
 fig2.update_yaxes(griddash='dash', gridwidth=0, gridcolor='#535566')
-fig2.layout.shapes = [    
-    # 70% line    
-        go.layout.Shape(        
-        type="line",        
-        x0=fig2.data[0].x[0],
+fig2.layout.shapes = [
+    # 70% line
+    go.layout.Shape(
+        type="line",
+        x0=pd.to_datetime(fig2.data[0].x[0]).value,
         y0=70,
-        x1=fig2.data[0].x[-1],
+        x1=pd.to_datetime(fig2.data[0].x[-1]).value,
         y1=70,
         line=dict(
             color="#0095e8",
@@ -219,9 +219,9 @@ fig2.layout.shapes = [
     # 30% line
     go.layout.Shape(
         type="line",
-        x0=fig2.data[0].x[0],
+        x0=pd.to_datetime(fig2.data[0].x[0]).value,
         y0=30,
-        x1=fig2.data[0].x[-1],
+        x1=pd.to_datetime(fig2.data[0].x[-1]).value,
         y1=30,
         line=dict(
             color="#0095e8",
