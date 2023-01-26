@@ -302,7 +302,7 @@ config = dict(
     {
         "scrollZoom": True,
         "displayModeBar": True,
-        # 'editable'              : True,
+        'editable' : True,
         "modeBarButtonsToAdd": [
             "drawline",
             "drawopenpath",
