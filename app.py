@@ -213,12 +213,12 @@ fig2.layout.shapes = [
         x1=fig2.data[0].x[-1],
         y1=70,
         line=dict(
-            color="#0095e8",
+            color="red", #BUY
             width=3,
             dash="dash"
         )
     ),
-    # 30% line
+    # 30% line 
     go.layout.Shape(
         type="line",
         x0=fig2.data[0].x[0],
@@ -226,7 +226,7 @@ fig2.layout.shapes = [
         x1=fig2.data[0].x[-1],
         y1=30,
         line=dict(
-            color="#0095e8",
+            color="green", #SELL
             width=3,
             dash="dash"
         )
