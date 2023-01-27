@@ -341,12 +341,6 @@ if st.checkbox('Support and Resistance'): # SHOW SUPPORT AND RESISTANCE BUTTON
     resistance = list(set(resistance))
 
 
-
-    fig3.update_xaxes(griddash='dash', gridwidth=1, gridcolor='#535566')
-    fig3.update_yaxes(griddash='dash', gridwidth=1, gridcolor='#535566')
-    fig3.layout.update(title="Support and Resistance Levels",title_font_size=35,title_x=0.5)
-    fig3.update_layout(height=1500)
-
     fig3.update_layout(
         dragmode="drawopenpath",
         newshape_line_color="cyan",
