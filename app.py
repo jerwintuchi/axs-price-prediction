@@ -286,7 +286,7 @@ for i in range(2, display_data.shape[0] - 2):
         if isFar(high, levels, display_data):
             resistance.append(high)
 
-if st.checkbox('Support and Resistance Chart'): # SHOW SUPPORT AND RESISTANCE BUTTON
+
 
 # Create a Plotly figure
     fig3 = go.Figure()
@@ -297,7 +297,7 @@ if st.checkbox('Support and Resistance Chart'): # SHOW SUPPORT AND RESISTANCE BU
 
 # Create a threshold variable to set the minimum distance between lines
     threshold = 0.05
-
+if st.checkbox('Support and Resistance Chart'): # SHOW SUPPORT AND RESISTANCE BUTTON
 # Add support levels to the figure
     for i in range(len(support)):
         index = display_data.loc[display_data['Low']==support[i]].index[0]
