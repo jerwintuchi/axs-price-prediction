@@ -379,6 +379,7 @@ if st.checkbox("Moving Average"):
                         opacity=0.7, 
                         line=dict(color='red', width=2), 
                         name='5d MA'))
+    st.plotly_chart(fig3, True)
 
 else:
 # Only show the candlestick chart if the "Support and Resistance Chart" checkbox is not ticked
