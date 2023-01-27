@@ -287,6 +287,11 @@ for i in range(2, display_data.shape[0] - 2):
 
 # Create a Plotly figure
 fig3 = go.Figure()
+# Add a candlestick chart of the data
+fig3.add_trace(go.Candlestick(x=display_data['Date'], open=display_data['Open'], high=display_data['High'], low=display_data['Low'], close=display_data['Close']))
+fig3.update_xaxes(griddash='dash', gridwidth=1, gridcolor='#535566')
+fig3.update_yaxes(griddash='dash', gridwidth=1, gridcolor='#535566')
+fig3.update_layout(height=1500)
 
 
 # Create a threshold variable to set the minimum distance between lines
@@ -367,7 +372,7 @@ else:
     fig4.update_xaxes(griddash='dash', gridwidth=1, gridcolor='#535566')
     fig4.update_yaxes(griddash='dash', gridwidth=1, gridcolor='#535566')
     fig4.update_layout(height=1500)
-    st.plotly_chart(fig4,True)
+    st.plotly_chart(fig4)
 
 # fig2.add_trace(go.Scatter(x=display_data_w.Date, y=display_data_w.Close, name="Price"))
 # fig2.layout.update(title="AXS-USD (1d Intervals)")
