@@ -322,7 +322,7 @@ st.plotly_chart(fig3, True)
 
 
 # Create a threshold variable to set the minimum distance between lines
-    threshold = 0.05
+threshold = 0.05
 if st.checkbox('Support and Resistance Chart'): # SHOW SUPPORT AND RESISTANCE BUTTON
 # Add support levels to the figure
     for i in range(len(support)):
