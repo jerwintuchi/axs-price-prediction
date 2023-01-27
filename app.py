@@ -294,13 +294,6 @@ fig3.update_yaxes(griddash='dash', gridwidth=1, gridcolor='#535566')
 fig3.update_layout(height=1500)
 
 
-# Create a variable to store the moving average value
-moving_average = None
-# Check if the user wants to add moving average to the chart
-if st.checkbox("Moving Average"):
-    moving_average = calculate_moving_average(display_data)
-    fig3.add_trace(go.Scatter(x=display_data['Date'], y=moving_average, name='Moving Average', line=dict(color='purple', width=2)))
-
 # Create a threshold variable to set the minimum distance between lines
 threshold = 0.05
 st.checkbox("Moving Average")
@@ -375,7 +368,18 @@ if st.checkbox('Support and Resistance'): # SHOW SUPPORT AND RESISTANCE BUTTON
     )
     st.plotly_chart(fig3, True)
 
+if st.set_checkbox_value("Moving Average", True):
+    fig3.add_trace(go.Scatter(x=display_data.Date, 
+                        y=display_data['ma'], 
+                        opacity=0.7, 
+                        line=dict(color='orange', width=3), 
+                        name='13d MA'))
 
+    fig3.add_trace(go.Scatter(x=display_data.Date, 
+                        y=display_data['ma5'], 
+                        opacity=0.7, 
+                        line=dict(color='red', width=2), 
+                        name='5d MA'))
 
 else:
 # Only show the candlestick chart if the "Support and Resistance Chart" checkbox is not ticked
