@@ -318,7 +318,7 @@ config = dict(
         "toImageButtonOptions": {"format": "svg"},
     }
 )
-    st.plotly_chart(fig3, True)
+st.plotly_chart(fig3, True)
 
 
 # Create a threshold variable to set the minimum distance between lines
