@@ -367,7 +367,7 @@ else:
     fig4.update_xaxes(griddash='dash', gridwidth=1, gridcolor='#535566')
     fig4.update_yaxes(griddash='dash', gridwidth=1, gridcolor='#535566')
     fig4.update_layout(height=1500)
-    st.plotly_chart(fig4)
+    st.plotly_chart(fig4,True)
 
 # fig2.add_trace(go.Scatter(x=display_data_w.Date, y=display_data_w.Close, name="Price"))
 # fig2.layout.update(title="AXS-USD (1d Intervals)")
