@@ -299,6 +299,7 @@ threshold = 0.05
 if st.checkbox('Moving Average'):
     fig3.add_trace(go.Scatter(x=display_data['Date'], y=display_data["ma"], line=dict(color='blue', width=1.5)))
     fig3.add_trace(go.Scatter(x=display_data['Date'], y=display_data["ma5"], line=dict(color='purple', width=1.5)))
+    fig3.update_layout(height=1500)
     st.plotly_chart(fig3, True)
 
 if st.checkbox('Support and Resistance'): # SHOW SUPPORT AND RESISTANCE BUTTON
