@@ -296,6 +296,7 @@ fig3.update_layout(height=1500)
 
 # Create a threshold variable to set the minimum distance between lines
 threshold = 0.05
+st.checkbox("Moving Average")
 
 if st.checkbox('Support and Resistance'): # SHOW SUPPORT AND RESISTANCE BUTTON
 # Add support levels to the figure
@@ -367,19 +368,7 @@ if st.checkbox('Support and Resistance'): # SHOW SUPPORT AND RESISTANCE BUTTON
     )
     st.plotly_chart(fig3, True)
 
-if st.checkbox("Moving Average"):
-    fig3.add_trace(go.Scatter(x=display_data.Date, 
-                        y=display_data['ma'], 
-                        opacity=0.7, 
-                        line=dict(color='orange', width=3), 
-                        name='13d MA'))
 
-    fig3.add_trace(go.Scatter(x=display_data.Date, 
-                        y=display_data['ma5'], 
-                        opacity=0.7, 
-                        line=dict(color='red', width=2), 
-                        name='5d MA'))
-    st.plotly_chart(fig3, True)
 
 else:
 # Only show the candlestick chart if the "Support and Resistance Chart" checkbox is not ticked
