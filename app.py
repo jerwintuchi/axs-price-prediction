@@ -361,12 +361,74 @@ if st.checkbox('Support and Resistance'): # SHOW SUPPORT AND RESISTANCE BUTTON
         }
     )
     
+    st.plotly_chart(fig3, True)
 
-if st.checkbox("Moving Average"):
+if st.checkbox("Moving Average") and st.checkbox("Support and Resistance"):
     fig3.add_trace(go.Scatter(x=display_data['Date'], y=display_data["ma"], line=dict(color='blue', width=1.5), name="13 Candle MA"))
     fig3.add_trace(go.Scatter(x=display_data['Date'], y=display_data["ma5"], line=dict(color='yellow', width=1.5), name="5 Candle MA"))
+    
+    # Add support levels to the figure
+    for i in range(len(support)):
+        index = display_data.loc[display_data['Low']==support[i]].index[0]
+        try:
+            next_support = support[i+1]
+            next_support_index = display_data.loc[display_data['Low']==next_support].index[0]
+            x1 = display_data['Date'][next_support_index]
+        except:
+            x1 = display_data['Date'].iloc[-1]
+        fig3.add_shape(
+            type='line',
+            x0=display_data['Date'][index],
+            y0=support[i],
+            x1=x1,
+            y1=support[i],
+         line=dict(color='green', width=3, dash='dot')
+        )
+# Add resistance levels to the figure
+    for i in range(len(resistance)):
+        indexr = display_data.loc[display_data['High']==resistance[i]].index[0]
+        try:
+         next_resistance = resistance[i+1]
+         next_resistance_index = display_data.loc[display_data['High']==next_resistance].index[0]
+         x1 = display_data['Date'][next_resistance_index]
+        except:
+            x1 = display_data['Date'].iloc[-1]
+        fig3.add_shape(
+            type='line',
+            x0=display_data['Date'][indexr],
+            y0=resistance[i],
+            x1=x1,
+            y1=resistance[i],
+            line=dict(color='red', width=3, dash='dot')
+        )
 
-    st.plotly_chart(fig3, True)
+# Removing duplicates values
+    support = list(set(support))
+    resistance = list(set(resistance))
+
+
+    fig3.update_layout(
+        dragmode="drawopenpath",
+        newshape_line_color="cyan",
+        title_text="You can draw within this chart.",
+    )
+    config = dict(
+        {
+            "scrollZoom": True,
+            "displayModeBar": True,
+            'editable' : True,
+            "modeBarButtonsToAdd": [
+                "drawline",
+                "drawopenpath",
+                "drawclosedpath",
+                "drawcircle",
+                "drawrect",
+                "eraseshape",
+            ],
+            "toImageButtonOptions": {"format": "svg"},
+        }
+    )
+
 
 
 else:
