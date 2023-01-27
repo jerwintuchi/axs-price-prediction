@@ -292,37 +292,11 @@ for i in range(2, display_data.shape[0] - 2):
     fig3 = go.Figure()
 # Add a candlestick chart of the data
     fig3.add_trace(go.Candlestick(x=display_data['Date'], open=display_data['Open'], high=display_data['High'], low=display_data['Low'], close=display_data['Close']))
-fig3.update_xaxes(griddash='dash', gridwidth=1, gridcolor='#535566')
-fig3.update_yaxes(griddash='dash', gridwidth=1, gridcolor='#535566')
-fig3.layout.update(title="Support and Resistance Levels",title_font_size=35,title_x=0.5)
-fig3.update_layout(height=1500)
 
-fig3.update_layout(
-    dragmode="drawopenpath",
-    newshape_line_color="cyan",
-    title_text="You can draw within this chart.",
-)
-config = dict(
-    {
-        "scrollZoom": True,
-        "displayModeBar": True,
-        'editable' : True,
-        "modeBarButtonsToAdd": [
-            "drawline",
-            "drawopenpath",
-            "drawclosedpath",
-            "drawcircle",
-            "drawrect",
-            "eraseshape",
-        ],
-        "toImageButtonOptions": {"format": "svg"},
-    }
-)
-st.plotly_chart(fig3, True)
 
 
 # Create a threshold variable to set the minimum distance between lines
-threshold = 0.05
+    threshold = 0.05
 if st.checkbox('Support and Resistance Chart'): # SHOW SUPPORT AND RESISTANCE BUTTON
 # Add support levels to the figure
     for i in range(len(support)):
@@ -362,35 +336,36 @@ if st.checkbox('Support and Resistance Chart'): # SHOW SUPPORT AND RESISTANCE BU
 # Removing duplicates values
     support = list(set(support))
     resistance = list(set(resistance))
-    fig3.layout.update(title="Support and Resistance Levels",title_font_size=35,title_x=0.5)
-fig3.update_layout(height=1500)
 
-fig3.update_layout(
-    dragmode="drawopenpath",
-    newshape_line_color="cyan",
-    title_text="You can draw within this chart.",
-)
-config = dict(
-    {
-        "scrollZoom": True,
-        "displayModeBar": True,
-        'editable' : True,
-        "modeBarButtonsToAdd": [
-            "drawline",
-            "drawopenpath",
-            "drawclosedpath",
-            "drawcircle",
-            "drawrect",
-            "eraseshape",
+
+
+    fig3.update_xaxes(griddash='dash', gridwidth=1, gridcolor='#535566')
+    fig3.update_yaxes(griddash='dash', gridwidth=1, gridcolor='#535566')
+    fig3.layout.update(title="Support and Resistance Levels",title_font_size=35,title_x=0.5)
+    fig3.update_layout(height=1500)
+
+    fig3.update_layout(
+        dragmode="drawopenpath",
+        newshape_line_color="cyan",
+        title_text="You can draw within this chart.",
+    )
+    config = dict(
+        {
+            "scrollZoom": True,
+            "displayModeBar": True,
+            'editable' : True,
+            "modeBarButtonsToAdd": [
+                "drawline",
+                "drawopenpath",
+                "drawclosedpath",
+                "drawcircle",
+                "drawrect",
+                "eraseshape",
             ],
-        "toImageButtonOptions": {"format": "svg"},
+            "toImageButtonOptions": {"format": "svg"},
         }
     )
-st.plotly_chart(fig3, True)
-
-
-
-    
+    st.plotly_chart(fig3, True)
 
 # fig2.add_trace(go.Scatter(x=display_data_w.Date, y=display_data_w.Close, name="Price"))
 # fig2.layout.update(title="AXS-USD (1d Intervals)")
