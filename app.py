@@ -198,6 +198,7 @@ fig.add_trace(go.Scatter(x=display_data.Date,
                         opacity=0.7, 
                         line=dict(color='red', width=2), 
                         name='5d MA'))
+st.plotly_chart(fig, True)
                     
 #st.write(display_data.isna().sum())
 st.write(type(display_data["ksi"]))
@@ -297,7 +298,7 @@ for i in range(2, display_data.shape[0] - 2):
 
 # Create a threshold variable to set the minimum distance between lines
     threshold = 0.05
-if st.checkbox('Support and Resistance Chart'): # SHOW SUPPORT AND RESISTANCE BUTTON
+if st.checkbox('Support and Resistance'): # SHOW SUPPORT AND RESISTANCE BUTTON
 # Add support levels to the figure
     for i in range(len(support)):
         index = display_data.loc[display_data['Low']==support[i]].index[0]
