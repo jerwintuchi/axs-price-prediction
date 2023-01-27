@@ -296,9 +296,6 @@ fig3.update_layout(height=1500)
 
 # Create a threshold variable to set the minimum distance between lines
 threshold = 0.05
-if st.checkbox('Moving Average'):
-    fig3.add_trace(go.Scatter(x=display_data['Date'], y=display_data["ma"], line=dict(color='blue', width=1.5), name="13 Candle MA"))
-    fig3.add_trace(go.Scatter(x=display_data['Date'], y=display_data["ma5"], line=dict(color='yellow', width=1.5), name="5 Candle MA"))
     
 
 if st.checkbox('Support and Resistance'): # SHOW SUPPORT AND RESISTANCE BUTTON
@@ -364,6 +361,10 @@ if st.checkbox('Support and Resistance'): # SHOW SUPPORT AND RESISTANCE BUTTON
         }
     )
     st.plotly_chart(fig3, True)
+
+if st.checkbox('Moving Average'):
+    fig3.add_trace(go.Scatter(x=display_data['Date'], y=display_data["ma"], line=dict(color='blue', width=1.5), name="13 Candle MA"))
+    fig3.add_trace(go.Scatter(x=display_data['Date'], y=display_data["ma5"], line=dict(color='yellow', width=1.5), name="5 Candle MA"))   
 
 
 else:
