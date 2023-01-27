@@ -287,14 +287,15 @@ for i in range(2, display_data.shape[0] - 2):
 
 
 # Create a Plotly figure
-    fig3 = go.Figure()
+fig3 = go.Figure()
 # Add a candlestick chart of the data
-    fig3.add_trace(go.Candlestick(x=display_data['Date'], open=display_data['Open'], high=display_data['High'], low=display_data['Low'], close=display_data['Close']))
-
+fig3.add_trace(go.Candlestick(x=display_data['Date'], open=display_data['Open'], high=display_data['High'], low=display_data['Low'], close=display_data['Close']))
+fig3.update_layout(height=1500)
 
 
 # Create a threshold variable to set the minimum distance between lines
-    threshold = 0.05
+threshold = 0.05
+
 if st.checkbox('Support and Resistance'): # SHOW SUPPORT AND RESISTANCE BUTTON
 # Add support levels to the figure
     for i in range(len(support)):
