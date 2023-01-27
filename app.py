@@ -368,7 +368,7 @@ if st.checkbox('Support and Resistance'): # SHOW SUPPORT AND RESISTANCE BUTTON
     )
     st.plotly_chart(fig3, True)
 
-if st.checkbox("Moving Average"):
+if st.sidebar.checkbox("Moving Average"):
     fig3.add_trace(go.Scatter(x=display_data.Date, 
                         y=display_data['ma'], 
                         opacity=0.7, 
