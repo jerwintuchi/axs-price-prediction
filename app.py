@@ -300,7 +300,7 @@ support_resistance_checkbox = st.checkbox('Support and Resistance')
 
 # Create a threshold variable to set the minimum distance between lines
 threshold = 0.05
-if moving_average_checkbox.isChecked():
+if st.checkbox('Moving Average'):
     fig3.add_trace(go.Scatter(x=display_data['Date'], y=display_data["ma"], line=dict(color='blue', width=1.5)))
     fig3.add_trace(go.Scatter(x=display_data['Date'], y=display_data["ma5"], line=dict(color='purple', width=1.5)))
 
