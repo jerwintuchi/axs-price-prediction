@@ -360,7 +360,7 @@ if st.checkbox('Support and Resistance'): # SHOW SUPPORT AND RESISTANCE BUTTON
             "toImageButtonOptions": {"format": "svg"},
         }
     )
-    st.plotly_chart(fig3, True)
+    
 
 if st.checkbox("Moving Average"):
     fig3.add_trace(go.Scatter(x=display_data['Date'], y=display_data["ma"], line=dict(color='blue', width=1.5), name="13 Candle MA"))
