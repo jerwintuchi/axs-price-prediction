@@ -312,6 +312,7 @@ if st.checkbox('Support and Resistance'): # SHOW SUPPORT AND RESISTANCE BUTTON
         except:
             x1 = display_data['Date'].iloc[-1]
         fig3.add_shape(
+            name="Support Level"
             type='line',
             x0=display_data['Date'][index],
             y0=support[i],
@@ -329,6 +330,7 @@ if st.checkbox('Support and Resistance'): # SHOW SUPPORT AND RESISTANCE BUTTON
         except:
             x1 = display_data['Date'].iloc[-1]
         fig3.add_shape(
+            name="Resistance Level"
             type='line',
             x0=display_data['Date'][indexr],
             y0=resistance[i],
