@@ -369,6 +369,8 @@ if st.checkbox('Support and Resistance Chart'): # SHOW SUPPORT AND RESISTANCE BU
 else:
 # Only show the candlestick chart if the "Support and Resistance Chart" checkbox is not ticked
     fig4 = go.Figure(data=[go.Candlestick(x=display_data['Date'], open=display_data['Open'], high=display_data['High'], low=display_data['Low'], close=display_data['Close'])])
+    fig4.update_xaxes(griddash='dash', gridwidth=1, gridcolor='#535566')
+    fig4.update_yaxes(griddash='dash', gridwidth=1, gridcolor='#535566')
     st.plotly_chart(fig4)
 
 # fig2.add_trace(go.Scatter(x=display_data_w.Date, y=display_data_w.Close, name="Price"))
