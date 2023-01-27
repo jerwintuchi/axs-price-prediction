@@ -198,7 +198,6 @@ fig.add_trace(go.Scatter(x=display_data.Date,
                         opacity=0.7, 
                         line=dict(color='red', width=2), 
                         name='5d MA'))
-st.plotly_chart(fig, True)
                     
 #st.write(display_data.isna().sum())
 st.write(type(display_data["ksi"]))
