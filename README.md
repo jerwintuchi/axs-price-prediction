@@ -3,5 +3,3 @@
 ## About
 A web app for forecasting price movement of AXS using trained LSTM model.
 
-[AXS Prediction Website](https://jerwintuchi-axs-price-prediction-app-yf7bht.streamlit.app/)
-(Forecast to be updated)
