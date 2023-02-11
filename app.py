@@ -297,7 +297,9 @@ fig3.update_layout(height=1500)
 # Create a threshold variable to set the minimum distance between lines
 threshold = 0.05
 
-option = st.selectbox('Technical Indicators', ('Moving Average', 'Support & Resistance'))
+options = st.multiselect(
+    'Select your Technical Indicator(s)',
+    ['Moving Average', 'Support & Resistance'])
 
 if st.checkbox('Moving Average'):
     fig3.add_trace(go.Scatter(x=display_data['Date'], y=display_data["ma"], line=dict(color='blue', width=1.5), name="13 Candle MA"))
