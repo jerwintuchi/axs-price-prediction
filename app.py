@@ -291,7 +291,7 @@ fig3 = go.Figure()
 fig3.add_trace(go.Candlestick(x=display_data['Date'], open=display_data['Open'], high=display_data['High'], low=display_data['Low'], close=display_data['Close'], name="AXS Price"))
 fig3.update_xaxes(griddash='dash', gridwidth=1, gridcolor='#535566')
 fig3.update_yaxes(griddash='dash', gridwidth=1, gridcolor='#535566')
-fig3.update_layout(height=1500)
+fig3.update_layout(height=1500) 
 
 
 # Create a threshold variable to set the minimum distance between lines
@@ -299,9 +299,9 @@ threshold = 0.05
 if st.checkbox('Moving Average'):
     fig3.add_trace(go.Scatter(x=display_data['Date'], y=display_data["ma"], line=dict(color='blue', width=1.5), name="13 Candle MA"))
     fig3.add_trace(go.Scatter(x=display_data['Date'], y=display_data["ma5"], line=dict(color='yellow', width=1.5), name="5 Candle MA"))
-    
 
-if st.checkbox('Support and Resistance'): # SHOW SUPPORT AND RESISTANCE BUTTON
+
+elif st.checkbox('Support and Resistance'): # SHOW SUPPORT AND RESISTANCE BUTTON
 # Add support levels to the figure
     for i in range(len(support)):
         index = display_data.loc[display_data['Low']==support[i]].index[0]
