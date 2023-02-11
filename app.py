@@ -301,13 +301,13 @@ options = st.multiselect(
     'Select your Technical Indicator(s)',
     ['Moving Average', 'Support & Resistance'])
 
-if st.checkbox('Moving Average'):
+if options == 'Moving Average':
     fig3.add_trace(go.Scatter(x=display_data['Date'], y=display_data["ma"], line=dict(color='blue', width=1.5), name="13 Candle MA"))
     fig3.add_trace(go.Scatter(x=display_data['Date'], y=display_data["ma5"], line=dict(color='yellow', width=1.5), name="5 Candle MA"))
 
 
 
-if st.checkbox('Support and Resistance'): # SHOW SUPPORT AND RESISTANCE BUTTON
+if options == 'Support & Resistance': # SHOW SUPPORT AND RESISTANCE BUTTON
 # Add support levels to the figure
     for i in range(len(support)):
         index = display_data.loc[display_data['Low']==support[i]].index[0]
