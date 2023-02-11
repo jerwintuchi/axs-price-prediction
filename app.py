@@ -296,9 +296,9 @@ fig3.update_layout(height=1500)
 
 # Create a threshold variable to set the minimum distance between lines
 threshold = 0.05
-
+c_label = '<p style="font-family:Courier; color:Blue; font-size: 20px;">Select your Technical Indicator(s)</p>'
 options = st.multiselect(
-    'Select your Technical Indicator(s)',
+    label=c_label,
     ['Moving Average', 'Support & Resistance'])
 
 if 'Moving Average' in options and 'Support & Resistance' not in options:
