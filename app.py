@@ -364,7 +364,8 @@ if st.checkbox('Support and Resistance'): # SHOW SUPPORT AND RESISTANCE BUTTON
             "toImageButtonOptions": {"format": "svg"},
         }
     )
-    st.plotly_chart(fig3, True)
+
+st.plotly_chart(fig3, True)
 
 
 else:
