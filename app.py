@@ -370,7 +370,7 @@ if options == 'Support & Resistance': # SHOW SUPPORT AND RESISTANCE BUTTON
         }
     )
     st.plotly_chart(fig3, True)
-
+st.write(options)
 
 else:
 # Only show the candlestick chart if the "Support and Resistance Chart" checkbox is not ticked
