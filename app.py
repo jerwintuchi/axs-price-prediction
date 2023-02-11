@@ -296,11 +296,13 @@ fig3.update_layout(height=1500)
 
 # Create a threshold variable to set the minimum distance between lines
 threshold = 0.05
+
+option = st.selectbox('Technical Indicators', ('Moving Average', 'Support & Resistance'))
+
 if st.checkbox('Moving Average'):
-    fig69 = go.Figure(data=[go.Candlestick(x=display_data['Date'], open=display_data['Open'], high=display_data['High'], low=display_data['Low'], close=display_data['Close'])])
-    fig69.add_trace(go.Scatter(x=display_data['Date'], y=display_data["ma"], line=dict(color='blue', width=1.5), name="13 Candle MA"))
-    fig69.add_trace(go.Scatter(x=display_data['Date'], y=display_data["ma5"], line=dict(color='yellow', width=1.5), name="5 Candle MA"))
-    st.plotly_chart(fig69, True)
+    fig3.add_trace(go.Scatter(x=display_data['Date'], y=display_data["ma"], line=dict(color='blue', width=1.5), name="13 Candle MA"))
+    fig3.add_trace(go.Scatter(x=display_data['Date'], y=display_data["ma5"], line=dict(color='yellow', width=1.5), name="5 Candle MA"))
+
 
 
 if st.checkbox('Support and Resistance'): # SHOW SUPPORT AND RESISTANCE BUTTON
