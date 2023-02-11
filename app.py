@@ -370,7 +370,6 @@ if options == 'Support & Resistance': # SHOW SUPPORT AND RESISTANCE BUTTON
         }
     )
     st.plotly_chart(fig3, True)
-st.write(options)
 
 else:
 # Only show the candlestick chart if the "Support and Resistance Chart" checkbox is not ticked
@@ -379,6 +378,8 @@ else:
     fig4.update_yaxes(griddash='dash', gridwidth=1, gridcolor='#535566')
     fig4.update_layout(height=1500)
     st.plotly_chart(fig4,True)
+
+st.write(options)   
 
 # fig2.add_trace(go.Scatter(x=display_data_w.Date, y=display_data_w.Close, name="Price"))
 # fig2.layout.update(title="AXS-USD (1d Intervals)")
