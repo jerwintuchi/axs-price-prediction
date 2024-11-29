@@ -1,11 +1,11 @@
 streamlit==1.14.0
+altair==4.2.2
 feedparser==6.0.10
-Beautifulsoup4 
-Dateparser == 0.7.6
-Feedparser == 6.0.10
-requests
-newspaper3k
-yfinance == 0.1.74
-plotly 
-pandas_ta
-matplotlib
+beautifulsoup4==4.12.2  # Latest version as of now
+dateparser==0.7.6
+requests==2.31.0       # Add a specific version
+newspaper3k==0.2.8     # Add the latest stable version
+yfinance==0.1.74
+plotly==5.15.0         # Add a specific version
+pandas_ta==0.3.14b0    # Current latest version
+matplotlib==3.8.2      # Add a specific version
