@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.pyc
+*.pyd
+*.egg-info/
+build/
+dist/
+venv/
+.venv/
+env/
+
+# Editors and IDEs
+.idea/
+.vscode/
+*.swp
+*.swo
+*.ptvs-cache.json
+
+
+# Environment files
+.env
+*.ini
+
+# Other common ignores
+node_modules/
+yarn-error.log

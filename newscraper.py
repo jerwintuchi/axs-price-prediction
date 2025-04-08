@@ -22,7 +22,7 @@ def scrape_thumbnail(list):
     return list
 
 
-@st.cache()
+@st.cache_resource()
 def get_news(news_count):
     q = gn.search("Axie Infinity", when="14d")
     entries = q["entries"]
