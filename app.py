@@ -69,18 +69,17 @@ WEEK_AGO = WEEK_AGO.strftime("%Y-%m-%d")
 # 2020 to current date
 
 display_data = yf.download(
-    "AXS-USD", start="2021-02-01", end=TODAY, interval="1d")
-display_data.reset_index(inplace=True)
+    "AXS-USD", start="2021-02-01", end=TODAY, interval="1d", auto_adjust=False)
+display_data.reset_index(inplace=True)  
 display_data_w = yf.download(
-    "AXS-USD", start=WEEK_AGO, end=TODAY, interval="1d")
+    "AXS-USD", start=WEEK_AGO, end=TODAY, interval="1d", auto_adjust=False)
 display_data_w.reset_index(inplace=True)
 
+# Flatten the dataframe
+display_data.columns = display_data.columns.droplevel(1)
 
-# BTC = yf.download("BTC-USD", start="2014-01-01", end=TODAY)
-# BTC.reset_index(inplace=True)
-# print(BTC.info())
-# df_train = BTC[["Date", "Close"]]
-# df_train = df_train.rename(columns ={"Date":"ds", "Close":"y"})
+print(display_data.columns)
+print(display_data.info())
 
 
 # ====== AXS Price Prediction and Analysis ===========================================================================================
@@ -168,12 +167,23 @@ st.title("Current and historical Price Chart 📈")
 
 fig = go.Figure()
 
-fig.add_trace(go.Candlestick(x=display_data.Date, open=display_data.Open,
-              high=display_data.High, close=display_data.Close, low=display_data.Low))
+fig.add_trace(go.Candlestick(
+    x=display_data['Date'],  # Use the 'Date' column explicitly
+    open=display_data['Open'],
+    high=display_data['High'],
+    low=display_data['Low'],
+    close=display_data['Close']
+))  
+
 fig.layout.update(title="AXS-USD (1d Intervals)")
 fig.update_xaxes(griddash='dash', gridwidth=1, gridcolor='#535566')
 fig.update_yaxes(griddash='dash', gridwidth=1, gridcolor='#535566')
-fig.update_layout(height=800)
+fig.update_layout(
+    title="AXS-USD Historical Price",
+    xaxis_title="Date",
+    yaxis_title="Price",
+    height=800
+)
 
 st.title("All Time Chart")
 st.plotly_chart(fig, True)
@@ -203,34 +213,40 @@ fig.add_trace(go.Scatter(x=display_data.Date,
 
 
 fig2 = go.Figure()  # RSI Chart
+
 # Create an empty list to store the color values
 color_list = []
 
 # Iterate through the RSI values
-for rsi_val in display_data.ksi:
-    # Check if the RSI value is above 70
-    if rsi_val > 70:
-        color_list.append('red')
-    # Check if the RSI value is below 30
-    elif rsi_val < 30:
-        color_list.append('green')
-    # Otherwise, set the color to blue
+for rsi_val in display_data["ksi"]:
+    # Check if the RSI value is not None
+    if rsi_val is not None:
+        # Check if the RSI value is above 70
+        if rsi_val > 70:
+            color_list.append('red')
+        # Check if the RSI value is below 30
+        elif rsi_val < 30:
+            color_list.append('green')
+        # Otherwise, set the color to blue
+        else:
+            color_list.append('#0095e8')
     else:
-        color_list.append('#0095e8')
+        # If RSI value is None, append a default color (optional)
+        color_list.append('#cccccc')  # Gray color for None
 
-fig2.add_trace(go.Scattergl(x=display_data.Date, y=display_data.ksi, name="RSI",
-               mode='lines', line=dict(width=3), marker=dict(color=color_list)))
-fig2.update_layout(title="RSI", title_font_size=35, title_x=0.5)
-fig2.update_xaxes(griddash='dash', gridwidth=0,
-                  gridcolor='#535566', type='date')
-fig2.update_yaxes(griddash='dash', gridwidth=0, gridcolor='#535566')
+
+# Get the first and last date for the shape lines
+first_date = display_data.Date.iloc[0]
+last_date = display_data.Date.iloc[-1]
+
+# Add the shapes first using the actual date values
 fig2.layout.shapes = [
     # 70% line
     go.layout.Shape(
         type="line",
-        x0=fig2.data[0].x[0],
+        x0=first_date,
         y0=70,
-        x1=fig2.data[0].x[-1],
+        x1=last_date,
         y1=70,
         line=dict(
             color="red",  # BUY
@@ -241,9 +257,9 @@ fig2.layout.shapes = [
     # 30% line
     go.layout.Shape(
         type="line",
-        x0=fig2.data[0].x[0],
+        x0=first_date,
         y0=30,
-        x1=fig2.data[0].x[-1],
+        x1=last_date,
         y1=30,
         line=dict(
             color="green",  # SELL
@@ -253,6 +269,15 @@ fig2.layout.shapes = [
     )
 ]
 
+# Then add the trace
+fig2.add_trace(go.Scattergl(x=display_data.Date, y=display_data.ksi, name="RSI",
+           mode='lines', line=dict(width=3), marker=dict(color=color_list)))
+
+fig2.update_layout(title="RSI", title_font_size=35, title_x=0.5)
+fig2.update_xaxes(griddash='dash', gridwidth=0,
+                 gridcolor='#535566', type='date')
+fig2.update_yaxes(griddash='dash', gridwidth=0, gridcolor='#535566')
+
 st.plotly_chart(fig2, True)
 
 # ====================================================SUPPORT AND RESISTANCE==========================================================
@@ -261,15 +286,13 @@ st.plotly_chart(fig2, True)
 def supportlvl(display_data, i):
     # if the previous 2 candles(1st and 2nd candle) is less than the 3rd candle (df['Low'][i]) and the succeeding 2 candles is greater than 3rd candle (df['Low'][i])
     # then it is the supportlvl
-    support = display_data['Low'][i] < display_data['Low'][i-1] and display_data['Low'][i] < display_data['Low'][i +
-                                                                                                                 1] and display_data['Low'][i+1] < display_data['Low'][i+2] and display_data['Low'][i-1] < display_data['Low'][i-2]
+    support = display_data['Low'][i] < display_data['Low'][i-1] and display_data['Low'][i] < display_data['Low'][i + 1] and display_data['Low'][i+1] < display_data['Low'][i+2] and display_data['Low'][i-1] < display_data['Low'][i-2]
     return support
 
 
 def resistancelvl(display_data, i):
     # same logic with supportlvl except that it is reversed
-    resistance = display_data['High'][i] > display_data['High'][i-1] and display_data['High'][i] > display_data['High'][i +
-                                                                                                                        1] and display_data['High'][i+1] > display_data['High'][i+2] and display_data['High'][i-1] > display_data['High'][i-2]
+    resistance = display_data['High'][i] > display_data['High'][i-1] and display_data['High'][i] > display_data['High'][i + 1] and display_data['High'][i+1] > display_data['High'][i+2] and display_data['High'][i-1] > display_data['High'][i-2]
     return resistance
 
 
@@ -435,7 +458,7 @@ placeholder.button("Forecast Future Price", key="ph",
                    disabled=True, help="Please agree with the disclaimer first")
 
 # csv = r'D:\mynamejeff\forecaxst\.latest\forecast.csv'
-forecast = pd.read_csv("forecast.csv")
+forecast = pd.read_csv("forecasts/latest_forecast.csv")
 
 
 def display_forecast(forecast):
@@ -770,10 +793,10 @@ def display_news(num_of_news=15):
             with thumbnail:
                 try:
                     st.image(news[i]["thumbnail"], width=350,
-                             use_column_width="auto")
+                             use_container_width="auto")
                 except (Exception):  # Not all articles have thumbnails
                     st.image(backup_thumbnail, width=350,
-                             use_column_width="auto")
+                             use_container_width="auto")
 
             with text:
                 st.subheader(news[i]['title'])
