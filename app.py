@@ -75,8 +75,9 @@ display_data_w = yf.download(
     "AXS-USD", start=WEEK_AGO, end=TODAY, interval="1d", auto_adjust=False)
 display_data_w.reset_index(inplace=True)
 
-# Flatten the dataframe
+# Flatten the dataframes
 display_data.columns = display_data.columns.droplevel(1)
+display_data_w.columns = display_data_w.columns.droplevel(1)
 
 print(display_data.columns)
 print(display_data.info())
@@ -421,7 +422,7 @@ else:
     # Only show the candlestick chart if the "Support and Resistance Chart" checkbox is not ticked
     fig4 = go.Figure(data=[go.Candlestick(x=display_data['Date'], open=display_data['Open'],
                      high=display_data['High'], low=display_data['Low'], close=display_data['Close'])])
-    fig4.update_xaxes(griddash='dash', gridwidth=1, gridcolor='#535566')
+    fig4.update_xaxes(griddash='dash', gridwidth=1, gridcolor='#535566')    
     fig4.update_yaxes(griddash='dash', gridwidth=1, gridcolor='#535566')
     fig4.update_layout(height=1500)
     st.plotly_chart(fig4, True)
@@ -462,6 +463,8 @@ forecast = pd.read_csv("forecasts/latest_forecast.csv")
 
 
 def display_forecast(forecast):
+    # clean empty rows
+    forecast = forecast.dropna()
 
     forecast.DATE = pd.to_datetime(forecast.DATE)
 
@@ -484,33 +487,33 @@ def display_forecast(forecast):
     st.title("AXS Forecasted Price")
     st.subheader(range_str)
 
-    forecast["ma"] = forecast.lstm_default.rolling(window=300).mean()
-    forecast["ma4"] = forecast.lstm_default.rolling(window=100).mean()
+    forecast["ma_12d"] = forecast.forecast.rolling(window=300).mean()
+    forecast["ma_4d"] = forecast.forecast.rolling(window=100).mean()
 
     fig = go.Figure()
-    fig.add_trace(go.Scatter(x=forecast.DATE, y=forecast.lstm_default,
+    fig.add_trace(go.Scatter(x=forecast.DATE, y=forecast.forecast,
                   name="Forecast", line=dict(color="#0095e8", width=7)))
     fig.layout.update(title="AXS-USD")
     fig.update_xaxes(griddash='dash', gridwidth=1, gridcolor='#535566')
     fig.update_yaxes(griddash='dash', gridwidth=1, gridcolor='#535566')
 
     fig.add_trace(go.Scatter(x=forecast.DATE,
-                             y=forecast['ma'],
+                             y=forecast['ma_12d'],
                              opacity=0.7,
                              line=dict(color='orange', width=3),
-                             name='8d MA'))
+                             name='12 days MA'))
     fig.add_trace(go.Scatter(x=forecast.DATE,
-                             y=forecast['ma4'],
+                             y=forecast['ma_4d'],
                              opacity=0.7,
                              line=dict(color='red', width=2),
-                             name='4d MA'))
+                             name='4 days MA'))
 
 
 # BUY/SELL SIGNAL (OMMITED)
 #     for month in forecast_months[:3]:
 #         fig.add_annotation(
-#         x=month.DATE[month.lstm_default.idxmin()],
-#         y=month.lstm_default.min(),
+#         x=month.DATE[month.forecast.idxmin()],
+#         y=month.forecast.min(),
 #         xref="x",
 #         yref="y",
 #         text="Buy",
@@ -536,8 +539,8 @@ def display_forecast(forecast):
 
 
 # #     fig.add_annotation(
-# #     x=forecast.DATE[forecast.lstm_default.idxmin()],
-# #     y=forecast.lstm_default.min(),
+# #     x=forecast.DATE[forecast.forecast.idxmin()],
+# #     y=forecast.forecast.min(),
 # #     xref="x",
 # #     yref="y",
 # #     text="Strong Buy",
@@ -562,8 +565,8 @@ def display_forecast(forecast):
 # #     )
 
 #     fig.add_annotation(
-#     x=forecast.DATE[forecast.lstm_default.idxmax()],
-#     y=forecast.lstm_default.max(),
+#     x=forecast.DATE[forecast.forecast.idxmax()],
+#     y=forecast.forecast.max(),
 #     xref="x",
 #     yref="y",
 #     text="Sell",
@@ -587,9 +590,11 @@ def display_forecast(forecast):
 #     opacity=0.8
 #     )
 
-    fig.update_layout(height=500, width=1000)
-    plot, analysis = st.columns([4, 3])
-    plot.plotly_chart(fig)
+    fig.update_layout(height=500, width=1000)\
+    # display the forecast plot on top and center and analysis below it
+
+    st.plotly_chart(fig, True)
+    
 
     def price_change(start, end):
         price_change = round(((end - start)/abs(start)) * 100, 2)
@@ -597,8 +602,8 @@ def display_forecast(forecast):
             price_change = f"+{price_change}"
         return f"{price_change}%"
 
-    high_date = forecast.lstm_default.idxmax()
-    low_date = forecast.lstm_default.idxmin()
+    high_date = forecast.forecast.idxmax()
+    low_date = forecast.forecast.idxmin()
 
     neckweek = datetime.datetime.now() + datetime.timedelta(days=8)
     nxtweek = datetime.datetime.strptime(
@@ -610,38 +615,22 @@ def display_forecast(forecast):
     print(nxtmonth)
 
     tmpm = forecast.loc[forecast.DATE == nxtmonth]
-    # monthforecast = price_change(live_price, tmpm.lstm_default.iloc[0])
+    # monthforecast = price_change(live_price, tmpm.forecast.iloc[0])
     print(tmpm)
 
     tmpw = forecast.loc[forecast.DATE == nxtweek]
-    # weeklyforecast = price_change(live_price, tmpw.lstm_default.iloc[0])
+    # weeklyforecast = price_change(live_price, tmpw.forecast.iloc[0])
 
     monthnow = datetime.datetime.now().month
     monthend = forecast[forecast.DATE.dt.month ==
-                        monthnow].lstm_default.iloc[-1]
-    # monthend_change = price_change(live_price, monthend)
-
-    # movement = round(((tmpm.lstm_default.iloc[0] - live_price )/abs(live_price)) * 100, 2)
-
-    # if movement > 9:
-    #     pricemovement = "Uptrend"
-    # elif movement < -9:
-    #     pricemovement = "Downtrend"
-    # else:
-    #     pricemovement = "Neutral"
-
-    # neutral movement, downtrend, uptrend
-
-    # analysis.markdown(f"""
-    #         # Forecast Analysis:\n
-    #         - ### Lowest price is \${round(forecast.lstm_default.min(),2)} on {forecast.DATE[low_date]}
-    #         - ### Highest price is \${round(forecast.lstm_default.max(),2)} on {forecast.DATE[high_date]}
-
-    # """)
-
+                        monthnow].forecast.iloc[-1] 
+    
+    
     # Price Forecast for the next 7 days:  {weeklyforecast}
     # Price Forecast at the end of the month:  {monthend_change}
     # Forecast Analysis implies that AXS will be in a **{pricemovement} price movement in the upcoming month**
+
+
     st.write("##")
     st.markdown("""---""")
 
@@ -651,35 +640,28 @@ def display_forecast(forecast):
 
     month0_col.markdown(f"""
             ## Month of {month_name[months[1]]}
-            - ### Starting price: ${round(first_month.lstm_default.iloc[0], 2)}
-            - ### End price: ${round(first_month.lstm_default.iloc[-1], 2)}
-            - ### Change: {price_change(first_month.lstm_default.iloc[0], first_month.lstm_default.iloc[-1])}
-            - ### Average Price: ${round(first_month.lstm_default.mean(), 2)}
+            - ### Starting price: ${round(first_month.forecast.iloc[0], 2)}
+            - ### End price: ${round(first_month.forecast.iloc[-1], 2)}
+            - ### Change: {price_change(first_month.forecast.iloc[0], first_month.forecast.iloc[-1])}
+            - ### Average Price: ${round(first_month.forecast.mean(), 2)}
     """)
 
     month1_col.markdown(f"""
             ## Month of {month_name[months[2]]}
-            - ### Starting price: ${round(second_month.lstm_default.iloc[0], 2)}
-            - ### End price: ${round(second_month.lstm_default.iloc[-1], 2)}
-            - ### Change: {price_change(second_month.lstm_default.iloc[0], second_month.lstm_default.iloc[-1])}
-            - ### Average Price: ${round(second_month.lstm_default.mean(), 2)}
+            - ### Starting price: ${round(second_month.forecast.iloc[0], 2)}
+            - ### End price: ${round(second_month.forecast.iloc[-1], 2)}
+            - ### Change: {price_change(second_month.forecast.iloc[0], second_month.forecast.iloc[-1])}
+            - ### Average Price: ${round(second_month.forecast.mean(), 2)}
     """)
 
     month2_col.markdown(f"""
             ## Month of {month_name[months[3]]}
-            - ### Starting price: ${round(third_month.lstm_default.iloc[0], 2)}
-            - ### End price: ${round(third_month.lstm_default.iloc[-1], 2)}
-            - ### Change: {price_change(third_month.lstm_default.iloc[0], third_month.lstm_default.iloc[-1])}
-            - ### Average Price: ${round(third_month.lstm_default.mean(), 2)}
+            - ### Starting price: ${round(third_month.forecast.iloc[0], 2)}
+            - ### End price: ${round(third_month.forecast.iloc[-1], 2)}
+            - ### Change: {price_change(third_month.forecast.iloc[0], third_month.forecast.iloc[-1])}
+            - ### Average Price: ${round(third_month.forecast.mean(), 2)}
     """)
 
-    # month3_col.markdown(f"""
-    #         ## Month of {month_name[months[3]]}
-    #         - ### Starting price: {round(third_month.lstm_default.iloc[0], 2)}
-    #         - ### End price: ${round(third_month.lstm_default.iloc[-1], 2)}
-    #         - ### Change: {price_change(third_month.lstm_default.iloc[0], third_month.lstm_default.iloc[-1])}
-    #         - ### Average Price: ${round(third_month.lstm_default.mean(),2)}
-    # """)
 
     st.write("##")
     st.markdown("""---""")
@@ -706,9 +688,9 @@ def display_forecast(forecast):
     #                                     fill_color='lavender')
     #                         ))
 
-    forecast.drop("Unnamed: 0", axis=1, inplace=True)
+
     try:
-        forecast.columns = ["DATE", "FORECAST", "MA8", "MA4"]
+        forecast.columns = ["DATE", "FORECAST", "ma_12d", "ma_4d"]
         st.dataframe(forecast, use_container_width=True)
 
         filename = f"{forecast_months[0].DATE.iloc[0].month}-{forecast_months[0].DATE.iloc[0].year}_to_{forecast_months[-1].DATE.iloc[0].month}-{forecast_months[-1].DATE.iloc[0].year}_Forecast.csv"
@@ -722,33 +704,16 @@ def display_forecast(forecast):
 
 if agree:
     placeholder.empty()
-    foreast_btn = st.button("Forecast Future Price")
+    forecast_btn = st.button("Forecast Future Price")
 
     # try:
-    if foreast_btn:
+    if forecast_btn:
         display_forecast(forecast)  # <-- radio button value
     # except(Exception):
     #         st.markdown('e')
 
 st.write("##")
 st.write("##")
-
-
-# f = Forecaster(y=axs["close"], current_dates=axs["time"])
-# f.set_test_length(.2)
-# f.generate_future_dates(2600) #3 months ahead
-# f.tf_model = import_model
-
-# forecasted.drop("Unnamed:0", axis=1)
-# forecasted.drop("Unnamed:0", axis=1, inplace=True)
-
-
-# try:
-#     if forecast_btn:
-#         display_forecast(forecast) # <-- radio button value
-# except(Exception):
-#     pass
-
 
 st.write("##")
 st.markdown("""---""")
@@ -757,16 +722,6 @@ st.markdown("""---""")
 # === News Feed  =======================================================================================
 st.title("The Latest News about AXS 📰")
 st.write("##")
-
-# def sortbydate(news_list):
-#     for i in news_list:
-#         i["date"] = datetime.datetime.strptime(i["date"], '%B %d, %Y')
-#     news_list.sort(key = lambda x:x['date'], reverse=True)
-
-#     for i in news_list:
-#         i["date"] = datetime.datetime.strftime(i["date"], "%B %d, %Y")
-
-#     return news_list
 
 
 newsc = get_news(11)
