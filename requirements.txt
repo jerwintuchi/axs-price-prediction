@@ -16,6 +16,7 @@ feedfinder2==0.0.4
 feedparser==6.0.2
 filelock==3.18.0
 fonttools==4.57.0
+frozendict==2.4.6
 gitdb==4.0.12
 GitPython==3.1.44
 idna==3.10
@@ -41,7 +42,9 @@ numpy==2.2.4
 packaging==24.2
 pandas==2.2.3
 pandas_ta==0.3.14b0
+peewee==3.17.9
 pillow==11.1.0
+platformdirs==4.3.7
 plotly==5.15.0
 protobuf==3.20.3
 pyarrow==19.0.1
@@ -50,6 +53,7 @@ Pygments==2.19.1
 Pympler==1.1
 pyparsing==3.2.3
 python-dateutil==2.9.0.post0
+python-dotenv==1.1.0
 pytz==2025.2
 pywin32==310
 PyYAML==6.0.2
@@ -80,5 +84,5 @@ urllib3==2.3.0
 validators==0.34.0
 watchdog==6.0.0
 wheel==0.45.1
-yfinance==0.1.74
+yfinance==0.2.55
 zipp==3.21.0
