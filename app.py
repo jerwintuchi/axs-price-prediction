@@ -594,7 +594,7 @@ def display_forecast(forecast):
     # display the forecast plot on top and center and analysis below it
 
     st.plotly_chart(fig, True)
-    
+
 
     def price_change(start, end):
         price_change = round(((end - start)/abs(start)) * 100, 2)
