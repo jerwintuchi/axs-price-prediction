@@ -15,10 +15,11 @@ import requests
 import datetime
 from calendar import month_name
 import copy
+from model_forecast import save_forecast, forecast, get_forecast
 from dotenv import load_dotenv
 import os
 
-LOGO = "https://cryptologos.cc/logos/axie-infinity-axs-logo.png"
+LOGO = "axs-logo.png"
 st.set_page_config(page_title=" AXS Price Analysis & Prediction",
                    page_icon=LOGO, layout="wide")
 
@@ -458,13 +459,14 @@ placeholder = st.empty()
 placeholder.button("Forecast Future Price", key="ph",
                    disabled=True, help="Please agree with the disclaimer first")
 
-# csv = r'D:\mynamejeff\forecaxst\.latest\forecast.csv'
-forecast = pd.read_csv("forecasts/latest_forecast.csv")
+# === Forecast  =======================================================================================
+#forecast = save_forecast(forecast())
 
 
 def display_forecast(forecast):
+
     # clean empty rows
-    forecast = forecast.dropna()
+    #forecast = forecast.dropna()
 
     forecast.DATE = pd.to_datetime(forecast.DATE)
 
@@ -508,88 +510,6 @@ def display_forecast(forecast):
                              line=dict(color='red', width=2),
                              name='4 days MA'))
 
-
-# BUY/SELL SIGNAL (OMMITED)
-#     for month in forecast_months[:3]:
-#         fig.add_annotation(
-#         x=month.DATE[month.forecast.idxmin()],
-#         y=month.forecast.min(),
-#         xref="x",
-#         yref="y",
-#         text="Buy",
-#         showarrow=True,
-#         font=dict(
-#             family="sans-serif, monospace",
-#             size=16,
-#             color="#ffffff"
-#             ),
-#         align="center",
-#         arrowhead=2,
-#         arrowsize=1,
-#         arrowwidth=2,
-#         arrowcolor="White",
-#         ax=30,
-#         ay=30,
-#         bordercolor="#c7c7c7",
-#         borderwidth=2,
-#         borderpad=4,
-#         bgcolor="#ff7f0e",
-#         opacity=0.8
-#         )
-
-
-# #     fig.add_annotation(
-# #     x=forecast.DATE[forecast.forecast.idxmin()],
-# #     y=forecast.forecast.min(),
-# #     xref="x",
-# #     yref="y",
-# #     text="Strong Buy",
-# #     showarrow=True,
-# #     font=dict(
-# #         family="sans-serif, monospace",
-# #         size=16,
-# #         color="#ffffff"
-# #         ),
-# #     align="center",
-# #     arrowhead=2,
-# #     arrowsize=1,
-# #     arrowwidth=2,
-# #     arrowcolor="White",
-# #     ax=30,
-# #     ay=30,
-# #     bordercolor="#c7c7c7",
-# #     borderwidth=2,
-# #     borderpad=4,
-# #     bgcolor="#ff7f0e",
-# #     opacity=0.9
-# #     )
-
-#     fig.add_annotation(
-#     x=forecast.DATE[forecast.forecast.idxmax()],
-#     y=forecast.forecast.max(),
-#     xref="x",
-#     yref="y",
-#     text="Sell",
-#     showarrow=True,
-#     font=dict(
-#         family="sans-serif, monospace",
-#         size=16,
-#         color="#ffffff"
-#         ),
-#     align="center",
-#     arrowhead=2,
-#     arrowsize=1,
-#     arrowwidth=2,
-#     arrowcolor="White",
-#     ax=-50,
-#     ay=-35,
-#     bordercolor="Green",
-#     borderwidth=2,
-#     borderpad=4,
-#     bgcolor="Green",
-#     opacity=0.8
-#     )
-
     fig.update_layout(height=500, width=1000)\
     # display the forecast plot on top and center and analysis below it
 
@@ -615,20 +535,15 @@ def display_forecast(forecast):
     print(nxtmonth)
 
     tmpm = forecast.loc[forecast.DATE == nxtmonth]
-    # monthforecast = price_change(live_price, tmpm.forecast.iloc[0])
+
     print(tmpm)
 
     tmpw = forecast.loc[forecast.DATE == nxtweek]
-    # weeklyforecast = price_change(live_price, tmpw.forecast.iloc[0])
+
 
     monthnow = datetime.datetime.now().month
     monthend = forecast[forecast.DATE.dt.month ==
                         monthnow].forecast.iloc[-1] 
-    
-    
-    # Price Forecast for the next 7 days:  {weeklyforecast}
-    # Price Forecast at the end of the month:  {monthend_change}
-    # Forecast Analysis implies that AXS will be in a **{pricemovement} price movement in the upcoming month**
 
 
     st.write("##")
@@ -701,16 +616,14 @@ def display_forecast(forecast):
     except (Exception):
         st.write("refresh browser")
 
-
+# === Forecast Button =======================================================================================
 if agree:
     placeholder.empty()
     forecast_btn = st.button("Forecast Future Price")
 
-    # try:
     if forecast_btn:
-        display_forecast(forecast)  # <-- radio button value
-    # except(Exception):
-    #         st.markdown('e')
+        forecast_df = get_forecast() 
+        display_forecast(forecast_df)
 
 st.write("##")
 st.write("##")
